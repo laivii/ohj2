@@ -31,13 +31,13 @@ public class ProductManagementGUIController implements ModalControllerInterface<
     
     @FXML
     private void openAddNewProductView() {
-        ModalController.showModal(ProductManagementGUIController.class.getResource("AddProductGUIView.fxml"), "Lisää uusi", null, "");
+        ModalController.showModal(ProductManagementGUIController.class.getResource("ProductGUIView.fxml"), "Lisää uusi", null, "");
     }
     
     @FXML
     private void openEditProductView() {
         //Miten haetaan tuote id?
-        ModalController.showModal(ProductManagementGUIController.class.getResource("EditProductGUIView.fxml"), "Muokkaa", null, "");
+        ModalController.showModal(ProductManagementGUIController.class.getResource("ProductGUIView.fxml"), "Muokkaa", null, "");
     }
     
     @FXML
