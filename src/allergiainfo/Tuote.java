@@ -70,6 +70,15 @@ public class Tuote {
         return this.id;
     }
     
+    
+    /**
+     * Apumetodi, jolla saadaan täytettyä testiarvot tuotteelle
+     */
+    public void taytaTuoteTiedoilla() {
+        nimi = "Quesadilla";
+        ravintolaId = 1;
+    }
+    
     /**
      * @param args ei käytössä
      */
@@ -82,8 +91,8 @@ public class Tuote {
         
         t.tulosta(System.out);
         
-        //t.taytaTuoteTiedoilla();
-        //t2.taytaTuoteTiedoilla();
+        t.taytaTuoteTiedoilla();
+        t2.taytaTuoteTiedoilla();
         
         t.tulosta(System.out);
         t2.tulosta(System.out); 
