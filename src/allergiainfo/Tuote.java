@@ -4,6 +4,12 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 /**
+ * Vastuut:
+ * Tietää tuotteen kentät (id, nimi, ravintolaId)
+ * Osaa tarkistaa tietyn kentän oikeellisuuden
+ * Osaa muuttaa merkkijonon tuotteen tiedoiksi
+ * Osaa antaa merkkijonona tietyn kentän
+ * Osaa laittaa merkkijonon tietyksi kentäksi
  * 
  * @author Viivi
  * @version 21.2.2025
@@ -63,6 +69,7 @@ public class Tuote {
         return this.id;
     }
     
+    
     /**
      * @return palauttaa tuotteen id:n
      */
@@ -78,6 +85,7 @@ public class Tuote {
         nimi = "Quesadilla";
         ravintolaId = 1;
     }
+    
     
     /**
      * @param args ei käytössä

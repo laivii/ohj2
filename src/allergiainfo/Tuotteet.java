@@ -1,6 +1,14 @@
 package allergiainfo;
 
 /**
+ * Vastuut:
+ * Pitää yllä varsinaista tuoterekisteriä, eli osaa lisätä ja poistaa tuotteen
+ * Lukee ja kirjoittaa tuotteiston tiedostoon(?)
+ * Osaa etsiä ja lajitella
+ * 
+ * Avustajat:
+ * Tuote-luokka
+ * 
  * @author Viivi
  * @version 21.2.2025
  */
@@ -49,7 +57,7 @@ public class Tuotteet {
         lkm++;
     }
     
-    
+ 
     /**
      * Palauttaa viitteen i:teen tuotteeseen
      * @param i monennenko tuotteen viite halutaan
@@ -71,6 +79,7 @@ public class Tuotteet {
     public int getLkm() {
         return lkm;
     }
+    
     
     /**
      * @param args ei käytössä
