@@ -14,8 +14,16 @@ public class Allergiainfo {
      * @throws SailoException jos lisääminen ei onnistu
      * 
      */
-    public void lisaa(Tuote tuote) throws SailoException {
-        tuotteet.lisaa(tuote);
+    public void lisaaTuote(Tuote tuote) throws SailoException {
+        this.tuotteet.lisaa(tuote);
+    }
+    
+    /**
+     * Poistaa tuotteen taulukosta
+     * @param id poistettavan tuotteen id 
+     */
+    public void poistaTuote(int id) {
+        this.tuotteet.poista(id);
     }
     
     /**
@@ -23,7 +31,7 @@ public class Allergiainfo {
      * @return tuotteiden lukumäärä
      */
     public int getTuotteita() {
-        return tuotteet.getLkm();   
+        return this.tuotteet.getLkm();   
     }
     
     /**
@@ -32,7 +40,7 @@ public class Allergiainfo {
      * @return tuote paikasta i
      */
     public Tuote annaTuote(int i) {
-        return tuotteet.anna(i);
+        return this.tuotteet.anna(i);
     }
 
     /**
@@ -43,18 +51,35 @@ public class Allergiainfo {
         
         Tuote t = new Tuote();
         Tuote t2 = new Tuote();
+        Tuote t3 = new Tuote();
+        Tuote t4 = new Tuote();
         
         t.rekisteroi();
         t.taytaTuoteTiedoilla();
         t2.rekisteroi();
         t2.taytaTuoteTiedoilla();
+        t3.rekisteroi();
+        t3.taytaTuoteTiedoilla();
+        t4.rekisteroi();
+        t4.taytaTuoteTiedoilla();
         
         try {
-            ai.lisaa(t);
-            ai.lisaa(t2);
+            ai.lisaaTuote(t);
+            ai.lisaaTuote(t2);
+            ai.lisaaTuote(t3);
+            ai.lisaaTuote(t4);
         } catch (SailoException e) {
             System.err.println(e.getMessage());
         }
+        
+        for( int i = 0; i < ai.getTuotteita(); i++) {
+            Tuote tuote = ai.annaTuote(i);
+            tuote.tulosta(System.out);
+        }
+        
+        ai.poistaTuote(1);
+        
+        System.out.println("Poistettu ensimmäinen");
         
         for( int i = 0; i < ai.getTuotteita(); i++) {
             Tuote tuote = ai.annaTuote(i);

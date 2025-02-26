@@ -23,7 +23,7 @@ public class Tuotteet {
      * Luodaan alustava taulukko
      */
     public Tuotteet() {
-        alkiot = new Tuote[MAX_TUOTTEITA];
+        this.alkiot = new Tuote[MAX_TUOTTEITA];
     }
     
     
@@ -52,9 +52,61 @@ public class Tuotteet {
      * </pre> 
      */
     public void lisaa(Tuote tuote) throws SailoException {
-        if( lkm >= alkiot.length ) throw new SailoException("Liikaa tuotteita");
-        alkiot[lkm] = tuote;
-        lkm++;
+        if( this.lkm >= this.alkiot.length ) throw new SailoException("Liikaa tuotteita");
+        this.alkiot[lkm] = tuote;
+        this.lkm++;
+    }
+    
+    
+    
+    /**
+     * Poistaa valitun tuotteen
+     * @param id poistettavan tuotteen id
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     *   Tuotteet tuotteet = new Tuotteet();
+     *   Tuote t1 = new Tuote();
+     *   Tuote t2 = new Tuote();
+     *   Tuote t3 = new Tuote();
+     *   
+     *   t1.rekisteroi(); t1.getId() === 1;
+     *   t2.rekisteroi(); t1.getId() === 1;
+     *   t3.rekisteroi(); t1.getId() === 1;
+     *   
+     *   tuotteet.lisaa(t1); tuotteet.getLkm() === 1;
+     *   tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
+     *   tuotteet.lisaa(t3); tuotteet.getLkm() === 3;
+     *   
+     *   tuotteet.poista(1); tuotteet.getLkm() === 2;
+     *   tuotteet.poista(4); tuotteet.getLkm() === 2;
+     *   tuotteet.poista(2); tuotteet.getLkm() === 1;
+     *   tuotteet.poista(3); tuotteet.getLkm() === 0;
+     * </pre>
+     */
+    public void poista(int id) {
+        int index = -1;
+        
+        for( int i = 0; i < this.alkiot.length; i++ ) {
+            if( this.alkiot[i] != null && this.alkiot[i].getId() == id ) {
+                index = i;
+            }
+        }
+        
+        if( index != -1 ) {
+        
+            Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
+        
+            for( int i = 0, j = 0; i < this.alkiot.length; i++ ) {
+                if( i != index ) {
+                    uusiLista[j] = this.alkiot[i];
+                    j++;
+                }
+            }
+            
+            this.alkiot = uusiLista;
+            this.lkm -= 1;
+        }
     }
     
  
@@ -68,7 +120,7 @@ public class Tuotteet {
         if( i < 0 || this.lkm <= i ) {
             throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
         }
-        return alkiot[i];
+        return this.alkiot[i];
     }
     
     
@@ -77,7 +129,7 @@ public class Tuotteet {
      * @return tuotteiden lukumäärä
      */
     public int getLkm() {
-        return lkm;
+        return this.lkm;
     }
     
     

@@ -16,7 +16,7 @@ import java.io.PrintStream;
  *
  */
 public class Tuote {
-    private int     id;
+    private int     id              = 0;
     private String  nimi            = "";
     private int     ravintolaId     = -1;
     
@@ -36,7 +36,7 @@ public class Tuote {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%04d", id) + " " + nimi + " " + String.format("%04d", ravintolaId));
+        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.ravintolaId));
     }
     
     
@@ -65,7 +65,7 @@ public class Tuote {
      */
     public int rekisteroi() {
         this.id = seuraavaNro;
-        seuraavaNro++;
+        Tuote.seuraavaNro++;
         return this.id;
     }
     
@@ -82,8 +82,8 @@ public class Tuote {
      * Apumetodi, jolla saadaan täytettyä testiarvot tuotteelle
      */
     public void taytaTuoteTiedoilla() {
-        nimi = "Quesadilla";
-        ravintolaId = 1;
+        this.nimi = "Quesadilla";
+        this.ravintolaId = 1;
     }
     
     
