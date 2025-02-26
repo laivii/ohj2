@@ -67,6 +67,15 @@ public class Ravintola {
     
     
     /**
+     * Asetetaan ravintolan nimi
+     * @param nimi ravintolan nimi
+     */
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+    
+    
+    /**
      * @return palauttaa ravintolan id:n
      */
     public int getId() {
