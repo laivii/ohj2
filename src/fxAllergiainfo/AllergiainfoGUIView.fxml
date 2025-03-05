@@ -36,9 +36,9 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <ScrollPane hbarPolicy="NEVER">
+            <ScrollPane fx:id="panelTuotteet" hbarPolicy="NEVER" minHeight="350.0" minWidth="500.0">
                <content>
-                  <VBox>
+               <VBox minHeight="350.0">
                      <children>
                         <VBox>
                            <padding>
@@ -130,6 +130,22 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT" prefWidth="500.0">
                <children>
+                  <Button fx:id="addnewp" mnemonicParsing="false" onAction="#addNewProduct" text="Lisää uusi tuote">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deletefirstp" mnemonicParsing="false" onAction="#deleteFirstProduct" text="Poista ensimmäinen tuote">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
                   <Button fx:id="pmanage" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#openHandleProducts" text="Hallitse tuotteita">
                      <font>
                         <Font size="16.0" />

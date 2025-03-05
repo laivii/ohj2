@@ -3,8 +3,10 @@ package fxAllergiainfo;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
+
+import allergiainfo.Allergiainfo;
 
 
 /**
@@ -16,11 +18,21 @@ public class AllergiainfoMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("AllergiainfoGUIView.fxml"));
-			Scene scene = new Scene(root,750,500);
+			final FXMLLoader ldr = new FXMLLoader(getClass().getResource("AllergiainfoGUIView.fxml"));
+			final Pane root = (Pane)ldr.load();
+			final AllergiainfoGUIController allergiainfoCtrl = (AllergiainfoGUIController)ldr.getController();
+			
+			
+			final Scene scene = new Scene(root,750,500);
 			scene.getStylesheets().add(getClass().getResource("allergiainfo.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Allergiainfo");
+			
+			Allergiainfo allergiainfo = new Allergiainfo();
+			allergiainfoCtrl.setAllergiainfo(allergiainfo);
+			
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
