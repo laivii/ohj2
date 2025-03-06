@@ -16,11 +16,11 @@ import java.io.PrintStream;
  *
  */
 public class Tuote {
-    private int     id              = 0;
-    private String  nimi            = "";
-    private int     ravintolaId     = -1;
+    private int     id               = 0;
+    private String  nimi             = "";
+    private int     yksiloivaNumero  = -1;
     
-    private static int seuraavaNro  = 1;
+    private static int seuraavaNro   = 1;
     
     
     /**
@@ -36,7 +36,7 @@ public class Tuote {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.ravintolaId));
+        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.yksiloivaNumero));
     }
     
     
@@ -84,7 +84,7 @@ public class Tuote {
      */
     public void taytaTuoteTiedoilla() {
         this.nimi = "Quesadilla";
-        this.ravintolaId = 1;
+        this.yksiloivaNumero = (int)(Math.random()*9999);
     }
     
     
