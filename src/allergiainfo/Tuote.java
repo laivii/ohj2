@@ -12,15 +12,16 @@ import java.io.PrintStream;
  * Osaa laittaa merkkijonon tietyksi kentäksi
  * 
  * @author Viivi
- * @version 21.2.2025
+ * @version 6.3.2025
  *
  */
 public class Tuote {
-    private int     id               = 0;
-    private String  nimi             = "";
-    private int     yksiloivaNumero  = -1;
     
-    private static int seuraavaNro   = 1;
+    private         int      id               = 0;
+    private         String   nimi             = "";
+    private         int      yksiloivaNumero  = -1;
+    
+    private static  int      seuraavaNro      = 1;
     
     
     /**
@@ -55,12 +56,12 @@ public class Tuote {
      * @example
      * <pre name="test">
      *  Tuote t = new Tuote();
-     *  t.getId() === 0;
+     *  t.haeId() === 0;
      *  t.rekisteroi();
      *  Tuote t2 = new Tuote();
      *  t2.rekisteroi();
-     *  int n1 = t.getId();
-     *  int n2 = t2.getId();
+     *  int n1 = t.haeId();
+     *  int n2 = t2.haeId();
      *  n1 === n2-1;
      * </pre>
      */
@@ -74,7 +75,7 @@ public class Tuote {
     /**
      * @return palauttaa tuotteen id:n
      */
-    public int getId() {
+    public int haeId() {
         return this.id;
     }
     

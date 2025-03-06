@@ -19,10 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 
 
+
 /**
  * @author Viivi
- * @version 8.2.2025
- *
+ * @version 6.3.2025
  */
 public class AllergiainfoGUIController implements Initializable {
     
@@ -32,20 +32,20 @@ public class AllergiainfoGUIController implements Initializable {
   	
     
 	@FXML
-	private void openHandleProducts() {
+	private void avaaTuotteidenhallinta() {
 	    ModalController.showModal(AllergiainfoGUIController.class.getResource("ProductManagementGUIView.fxml"), "Tuotteiden hallinta", null, "");
 	}
 	
 	
 	@FXML
-	private void addNewProduct() {
-	    addNew();
+	private void lisaaUusiTuote() {
+	    lisaaTuote();
 	}
 	
 	
 	@FXML
-	private void deleteProduct() {
-	    delete();
+	private void poistaViimeinenTuote() {
+	    poistaViimeinen();
 	}
 	
 	@Override
@@ -60,6 +60,7 @@ public class AllergiainfoGUIController implements Initializable {
 	private Allergiainfo allergiainfo;
 	private TextArea areaTuotteet = new TextArea();
 	
+	
 	/**
 	 * Asetetaan käytettävä allergiainfo
 	 * @param allergiainfo jota käytetään tässä käyttöliittymässä
@@ -72,7 +73,7 @@ public class AllergiainfoGUIController implements Initializable {
 	/**
 	 * Alustetaan tekstialue
 	 */
-	protected void alusta() {
+	private void alusta() {
 	    panelTuotteet.setContent(areaTuotteet);
 	    areaTuotteet.setFont(new Font("Courier New", 12));
 	    areaTuotteet.setEditable(false);
@@ -83,7 +84,7 @@ public class AllergiainfoGUIController implements Initializable {
 	/**
 	 * Luodaan uusi alustettu tuote
 	 */
-	protected void addNew() {	    
+	private void lisaaTuote() {	    
 	    Tuote tuote = new Tuote();
 	    tuote.rekisteroi(); //TODO muuta kun muokataan toimivaksi --> rekisteröinti vasta myöhemmin
 	    tuote.taytaTuoteTiedoilla();
@@ -103,13 +104,8 @@ public class AllergiainfoGUIController implements Initializable {
 	/**
 	 * Poistetaan tuotelistan ensimmäinen alkio
 	 */
-	public void delete() {
-	    /*
-	     * TODO Korjaa
-	     * - Rikki --> ei poista oikein ja hajoaa koska voi "poistaa tyhjää"
-	     * - Muuta poistamaan tuote id:n perusteella --> saa id:n parametrina
-	     */
-	    if( allergiainfo.getTuotteita() <= 0 ) return;
+	private void poistaViimeinen() {
+	    if( allergiainfo.haeTuotteita() <= 0 ) return;
 	    
 	    allergiainfo.poistaViimeinenTuote();
 	        
@@ -123,7 +119,7 @@ public class AllergiainfoGUIController implements Initializable {
 	 * @param os tietovirta johon tulostetaan
 	 * @param tuote joka halutaan tulostaa
 	 */
-	public void tulosta( PrintStream os, final Tuote tuote ) {
+	private void tulostaTuote( PrintStream os, final Tuote tuote ) {
 	    os.println("------------------------------");
 	    tuote.tulosta(os);
 	    os.println("------------------------------");
@@ -134,11 +130,11 @@ public class AllergiainfoGUIController implements Initializable {
 	 * Tulostaa listassa olevat tuotteet tekstialueeseen
 	 * @param text alue johon tulostetaan
 	 */
-	public void tulostaTuotteet(TextArea text) {	    
+	private void tulostaTuotteet(TextArea text) {	    
 	    try( PrintStream os = TextAreaOutputStream.getTextPrintStream(text)) {
-	        for( int i = 0; i < allergiainfo.getTuotteita(); i++ ) {
+	        for( int i = 0; i < allergiainfo.haeTuotteita(); i++ ) {
 	            Tuote tuote = allergiainfo.annaTuote( i );
-	            tulosta(os, tuote);
+	            tulostaTuote(os, tuote);
 	        }
 	    }
 	}

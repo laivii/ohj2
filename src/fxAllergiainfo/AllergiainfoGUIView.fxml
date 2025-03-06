@@ -130,7 +130,7 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT" prefWidth="500.0">
                <children>
-                  <Button fx:id="addnewp" mnemonicParsing="false" onAction="#addNewProduct" text="Lisää uusi tuote">
+                  <Button fx:id="addnewp" mnemonicParsing="false" onAction="#lisaaUusiTuote" text="Lisää uusi tuote">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -138,7 +138,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="deletep" mnemonicParsing="false" onAction="#deleteProduct" text="Poista viimeinen tuote">
+                  <Button fx:id="deletep" mnemonicParsing="false" onAction="#poistaViimeinenTuote" text="Poista viimeinen tuote">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -146,7 +146,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="pmanage" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#openHandleProducts" text="Hallitse tuotteita">
+                  <Button fx:id="pmanage" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#avaaTuotteidenhallinta" text="Hallitse tuotteita">
                      <font>
                         <Font size="16.0" />
                      </font>

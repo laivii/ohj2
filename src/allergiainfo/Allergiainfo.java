@@ -1,12 +1,14 @@
 package allergiainfo;
 
+
 /**
  * @author Viivi
- * @version 23.2.2025
- *
+ * @version 6.3.2025
  */
 public class Allergiainfo {
+    
     private Tuotteet tuotteet = new Tuotteet();
+    
     
     /**
      * Lisää uusi tuote
@@ -18,6 +20,7 @@ public class Allergiainfo {
         this.tuotteet.lisaa(tuote);
     }
     
+    
     /**
      * Poistaa tuotteen taulukosta
      * @param id poistettavan tuotteen id 
@@ -26,6 +29,7 @@ public class Allergiainfo {
         this.tuotteet.poistaTietty(id);
     }
     
+    
     /**
      * Poistaa taulukon viimeisen tuotteen
      */
@@ -33,13 +37,15 @@ public class Allergiainfo {
         this.tuotteet.poistaViimeinen();
     }
     
+    
     /**
      * Palauttaa tuotteiden määrät
      * @return tuotteiden lukumäärä
      */
-    public int getTuotteita() {
-        return this.tuotteet.getLkm();   
+    public int haeTuotteita() {
+        return this.tuotteet.haeLkm();   
     }
+    
     
     /**
      * Palauttaa allergiainfon i:n tuotteen
@@ -50,6 +56,7 @@ public class Allergiainfo {
         return this.tuotteet.anna(i);
     }
 
+    
     /**
      * @param args ei käytössä
      */
@@ -79,7 +86,7 @@ public class Allergiainfo {
             System.err.println(e.getMessage());
         }
         
-        for( int i = 0; i < ai.getTuotteita(); i++) {
+        for( int i = 0; i < ai.haeTuotteita(); i++) {
             Tuote tuote = ai.annaTuote(i);
             tuote.tulosta(System.out);
         }
@@ -88,7 +95,7 @@ public class Allergiainfo {
         
         System.out.println("Poistettu ensimmäinen");
         
-        for( int i = 0; i < ai.getTuotteita(); i++) {
+        for( int i = 0; i < ai.haeTuotteita(); i++) {
             Tuote tuote = ai.annaTuote(i);
             tuote.tulosta(System.out);
         }

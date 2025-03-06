@@ -10,13 +10,14 @@ package allergiainfo;
  * Tuote-luokka
  * 
  * @author Viivi
- * @version 21.2.2025
+ * @version 6.3.2025
  */
 public class Tuotteet {
-    private static final int MAX_TUOTTEITA  = 5;
     
-    private int lkm                         = 0;
-    private Tuote[] alkiot;
+    private static final int   MAX_TUOTTEITA   = 5;
+    
+    private int       lkm      = 0;
+    private Tuote[]   alkiot;
     
     
     /**
@@ -37,18 +38,18 @@ public class Tuotteet {
      *  Tuotteet tuotteet = new Tuotteet();
      *  Tuote t = new Tuote();
      *  Tuote t2 = new Tuote();
-     *  tuotteet.getLkm() === 0;
-     *  tuotteet.lisaa(t);  tuotteet.getLkm() === 1;
-     *  tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
-     *  tuotteet.lisaa(t);  tuotteet.getLkm() === 3;
+     *  tuotteet.haeLkm() === 0;
+     *  tuotteet.lisaa(t);  tuotteet.haeLkm() === 1;
+     *  tuotteet.lisaa(t2); tuotteet.haeLkm() === 2;
+     *  tuotteet.lisaa(t);  tuotteet.haeLkm() === 3;
      *  tuotteet.anna(0) === t;
      *  tuotteet.anna(1) === t2;
      *  tuotteet.anna(2) === t;
      *  tuotteet.anna(1) == t   === false;
      *  tuotteet.anna(1) == t2  === true;
      *  tuotteet.anna(3) === t; #THROWS IndexOutOfBoundsException
-     *  tuotteet.lisaa(t);  tuotteet.getLkm() === 4;
-     *  tuotteet.lisaa(t2); tuotteet.getLkm() === 5;
+     *  tuotteet.lisaa(t);  tuotteet.haeLkm() === 4;
+     *  tuotteet.lisaa(t2); tuotteet.haeLkm() === 5;
      *  tuotteet.lisaa(t); #THROWS SailoException
      * </pre> 
      */
@@ -73,14 +74,14 @@ public class Tuotteet {
      *   t2.rekisteroi(); t2.getId() === 2;
      *   t3.rekisteroi(); t3.getId() === 3;
      *   
-     *   tuotteet.lisaa(t1); tuotteet.getLkm() === 1;
-     *   tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
-     *   tuotteet.lisaa(t3); tuotteet.getLkm() === 3;
+     *   tuotteet.lisaa(t1); tuotteet.haeLkm() === 1;
+     *   tuotteet.lisaa(t2); tuotteet.haeLkm() === 2;
+     *   tuotteet.lisaa(t3); tuotteet.haeLkm() === 3;
      *   
-     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 2;
-     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 1;
-     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 0;
-     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 0;
+     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 2;
+     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 1;
+     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 0;
+     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 0;
      * </pre>
      */
     public void poistaViimeinen() {
@@ -112,14 +113,14 @@ public class Tuotteet {
      *   t2.rekisteroi(); t2.getId() === 5;
      *   t3.rekisteroi(); t3.getId() === 6;
      *   
-     *   tuotteet.lisaa(t1); tuotteet.getLkm() === 1;
-     *   tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
-     *   tuotteet.lisaa(t3); tuotteet.getLkm() === 3;
+     *   tuotteet.lisaa(t1); tuotteet.haeLkm() === 1;
+     *   tuotteet.lisaa(t2); tuotteet.haeLkm() === 2;
+     *   tuotteet.lisaa(t3); tuotteet.haeLkm() === 3;
      *   
-     *   tuotteet.poistaTietty(4); tuotteet.getLkm() === 2;
-     *   tuotteet.poistaTietty(7); tuotteet.getLkm() === 2;
-     *   tuotteet.poistaTietty(5); tuotteet.getLkm() === 1;
-     *   tuotteet.poistaTietty(6); tuotteet.getLkm() === 0;
+     *   tuotteet.poistaTietty(4); tuotteet.haeLkm() === 2;
+     *   tuotteet.poistaTietty(7); tuotteet.haeLkm() === 2;
+     *   tuotteet.poistaTietty(5); tuotteet.haeLkm() === 1;
+     *   tuotteet.poistaTietty(6); tuotteet.haeLkm() === 0;
      * </pre>
      */
     public void poistaTietty(int id) {
@@ -128,7 +129,7 @@ public class Tuotteet {
         int index = -1;
         
         for( int i = 0; i < this.alkiot.length; i++ ) {
-            if( this.alkiot[i] != null && this.alkiot[i].getId() == id ) {
+            if( this.alkiot[i] != null && this.alkiot[i].haeId() == id ) {
                 index = i;
             }
         }
@@ -166,7 +167,7 @@ public class Tuotteet {
     /**
      * @return tuotteiden lukumäärä
      */
-    public int getLkm() {
+    public int haeLkm() {
         return this.lkm;
     }
     
@@ -202,7 +203,7 @@ public class Tuotteet {
         System.out.println("Poistetaan tuote 1");
         
         
-        for( int i = 0; i < tuotteet.getLkm(); i++) {
+        for( int i = 0; i < tuotteet.haeLkm(); i++) {
             Tuote tuote = tuotteet.anna(i);
             tuote.tulosta(System.out);
         }
