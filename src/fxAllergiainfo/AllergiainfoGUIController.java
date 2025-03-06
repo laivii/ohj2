@@ -44,8 +44,8 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	
 	@FXML
-	private void deleteFirstProduct() {
-	    deleteFirst();
+	private void deleteProduct() {
+	    delete();
 	}
 	
 	@Override
@@ -59,7 +59,6 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	private Allergiainfo allergiainfo;
 	private TextArea areaTuotteet = new TextArea();
-	private int poistettava = 1;
 	
 	/**
 	 * Asetetaan käytettävä allergiainfo
@@ -104,11 +103,16 @@ public class AllergiainfoGUIController implements Initializable {
 	/**
 	 * Poistetaan tuotelistan ensimmäinen alkio
 	 */
-	public void deleteFirst() {
-	    //TODO Muokkaa poistamaan tietty tuote
-	    allergiainfo.poistaTuote( poistettava );
-	    this.poistettava++;
-	     
+	public void delete() {
+	    /*
+	     * TODO Korjaa
+	     * - Rikki --> ei poista oikein ja hajoaa koska voi "poistaa tyhjää"
+	     * - Muuta poistamaan tuote id:n perusteella --> saa id:n parametrina
+	     */
+	    if( allergiainfo.getTuotteita() <= 0 ) return;
+	    
+	    allergiainfo.poistaViimeinenTuote();
+	        
 	    areaTuotteet.clear();
 	    tulostaTuotteet(areaTuotteet);
 	}

@@ -28,6 +28,7 @@ public class Tuotteet {
     
     
     /**
+     * Lisätään uusi tuote taulukkoon
      * @param tuote joka halutaan lisätä taulukkoon
      * @throws SailoException poikkeus
      * @example
@@ -58,10 +59,8 @@ public class Tuotteet {
     }
     
     
-    
     /**
-     * Poistaa valitun tuotteen
-     * @param id poistettavan tuotteen id
+     * Poistetaan taulukon viimeinen alkio
      * @example
      * <pre name="test">
      * #THROWS SailoException
@@ -71,20 +70,61 @@ public class Tuotteet {
      *   Tuote t3 = new Tuote();
      *   
      *   t1.rekisteroi(); t1.getId() === 1;
-     *   t2.rekisteroi(); t1.getId() === 1;
-     *   t3.rekisteroi(); t1.getId() === 1;
+     *   t2.rekisteroi(); t2.getId() === 2;
+     *   t3.rekisteroi(); t3.getId() === 3;
      *   
      *   tuotteet.lisaa(t1); tuotteet.getLkm() === 1;
      *   tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
      *   tuotteet.lisaa(t3); tuotteet.getLkm() === 3;
      *   
-     *   tuotteet.poista(1); tuotteet.getLkm() === 2;
-     *   tuotteet.poista(4); tuotteet.getLkm() === 2;
-     *   tuotteet.poista(2); tuotteet.getLkm() === 1;
-     *   tuotteet.poista(3); tuotteet.getLkm() === 0;
+     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 2;
+     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 1;
+     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 0;
+     *   tuotteet.poistaViimeinen(); tuotteet.getLkm() === 0;
      * </pre>
      */
-    public void poista(int id) {
+    public void poistaViimeinen() {
+        if( this.lkm == 0 ) return;
+        
+        Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
+        
+        for( int i = 0; i < this.alkiot.length - 1; i++ ) {
+                uusiLista[i] = this.alkiot[i];
+        }
+        
+        this.alkiot = uusiLista;
+        this.lkm -= 1;
+    }
+    
+    
+    /**
+     * Poistaa valitun tuotteen id:n perusteella
+     * @param id poistettavan tuotteen id
+     * @example
+     * <pre name="test">
+     * #THROWS SailoException
+     *   Tuotteet tuotteet = new Tuotteet();
+     *   Tuote t1 = new Tuote();
+     *   Tuote t2 = new Tuote();
+     *   Tuote t3 = new Tuote();
+     *   
+     *   t1.rekisteroi(); t1.getId() === 4;
+     *   t2.rekisteroi(); t2.getId() === 5;
+     *   t3.rekisteroi(); t3.getId() === 6;
+     *   
+     *   tuotteet.lisaa(t1); tuotteet.getLkm() === 1;
+     *   tuotteet.lisaa(t2); tuotteet.getLkm() === 2;
+     *   tuotteet.lisaa(t3); tuotteet.getLkm() === 3;
+     *   
+     *   tuotteet.poistaTietty(4); tuotteet.getLkm() === 2;
+     *   tuotteet.poistaTietty(7); tuotteet.getLkm() === 2;
+     *   tuotteet.poistaTietty(5); tuotteet.getLkm() === 1;
+     *   tuotteet.poistaTietty(6); tuotteet.getLkm() === 0;
+     * </pre>
+     */
+    public void poistaTietty(int id) {
+        if( this.lkm == 0 ) return;
+        
         int index = -1;
         
         for( int i = 0; i < this.alkiot.length; i++ ) {
@@ -93,20 +133,19 @@ public class Tuotteet {
             }
         }
         
-        if( index != -1 ) {
+        if( index == -1 ) return;
         
-            Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
+        Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
         
-            for( int i = 0, j = 0; i < this.alkiot.length; i++ ) {
-                if( i != index ) {
-                    uusiLista[j] = this.alkiot[i];
-                    j++;
-                }
+        for( int i = 0, j = 0; i < this.alkiot.length; i++ ) {
+            if( i != index ) {
+                uusiLista[j] = this.alkiot[i];
+                j++;
             }
-            
-            this.alkiot = uusiLista;
-            this.lkm -= 1;
         }
+        
+        this.alkiot = uusiLista;
+        this.lkm -= 1;
     }
     
  
@@ -125,7 +164,6 @@ public class Tuotteet {
     
     
     /**
-     * Palauttaa tuotteiden lukumäärän
      * @return tuotteiden lukumäärä
      */
     public int getLkm() {
@@ -154,11 +192,18 @@ public class Tuotteet {
              System.err.println(e.getMessage());
         }
         
+        
         System.out.println("=============== Tuotteet testi ===============");
+        
+        t.tulosta(System.out);
+        t2.tulosta(System.out);
+        
+        tuotteet.poistaTietty(1);
+        System.out.println("Poistetaan tuote 1");
+        
         
         for( int i = 0; i < tuotteet.getLkm(); i++) {
             Tuote tuote = tuotteet.anna(i);
-            System.out.println("Tuote indeksi: " + i);
             tuote.tulosta(System.out);
         }
     }

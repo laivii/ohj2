@@ -22,8 +22,15 @@ public class Allergiainfo {
      * Poistaa tuotteen taulukosta
      * @param id poistettavan tuotteen id 
      */
-    public void poistaTuote(int id) {
-        this.tuotteet.poista(id);
+    public void poistaTiettyTuote(int id) {
+        this.tuotteet.poistaTietty(id);
+    }
+    
+    /**
+     * Poistaa taulukon viimeisen tuotteen
+     */
+    public void poistaViimeinenTuote() {
+        this.tuotteet.poistaViimeinen();
     }
     
     /**
@@ -77,7 +84,7 @@ public class Allergiainfo {
             tuote.tulosta(System.out);
         }
         
-        ai.poistaTuote(1);
+        ai.poistaTiettyTuote(1);
         
         System.out.println("Poistettu ensimmäinen");
         

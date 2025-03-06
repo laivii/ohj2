@@ -50,6 +50,7 @@ public class Tuote {
     
     
     /**
+     * Rekisteröidään tuote (eli annetaan sille yksilöllinen id)
      * @return palauttaa tuotteen id:n
      * @example
      * <pre name="test">
