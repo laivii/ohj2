@@ -1,13 +1,16 @@
 package allergiainfo;
 
+import java.util.List;
 
 /**
  * @author Viivi
- * @version 6.3.2025
+ * @version 8.3.2025
  */
 public class Allergiainfo {
     
-    private Tuotteet tuotteet = new Tuotteet();
+    private Tuotteet         tuotteet         = new Tuotteet();
+    private Allergeenit      allergeenit      = new Allergeenit();
+    private TuoteAllergeenit tuoteAllergeenit = new TuoteAllergeenit();
     
     
     /**
@@ -18,6 +21,15 @@ public class Allergiainfo {
      */
     public void lisaaTuote(Tuote tuote) throws SailoException {
         this.tuotteet.lisaa(tuote);
+    }
+    
+    /**
+     * Lisää uusi allergeeni
+     * @param allergeeni joka halutaan lisätä
+     * @throws SailoException jos lisääminen ei onnistu
+     */
+    public void lisaaAllergeeni(Allergeeni allergeeni ) throws SailoException {
+        this.allergeenit.lisaa(allergeeni);
     }
     
     
@@ -39,23 +51,73 @@ public class Allergiainfo {
     
     
     /**
-     * Palauttaa tuotteiden määrät
+     * Palauttaa tuotteiden määrän
      * @return tuotteiden lukumäärä
      */
     public int haeTuotteita() {
         return this.tuotteet.haeLkm();   
     }
     
+    /**
+     * Palauttaa allergeenien määrän
+     * @return allergeenien lukumäärä
+     */
+    public int haeAllergeeneja() {
+        return this.allergeenit.haeLkm();
+    }
+    
     
     /**
-     * Palauttaa allergiainfon i:n tuotteen
-     * @param i monesko tuote
+     * Palauttaa tuotteen id:n perusteella
+     * @param id tuotteen id
+     * @return Tuote
+     * @throws SailoException jos tuotetta ei löydä id:llä
+     */
+    public Tuote haeTuoteIdlla( int id ) throws SailoException {
+        return this.tuotteet.haeTuoteIdlla( id );
+    }
+    
+    
+    /**
+     * Palauttaa allergeenin id:n persuteella
+     * @param id allergeenin id
+     * @return Allergeenin
+     * @throws SailoException jos allergeenia ei löydy annetulla id:llä
+     */
+    public Allergeeni haeAllergeeniIdlla( int id ) throws SailoException {
+        return this.allergeenit.haeAllergeeniIdlla( id );
+    }
+    
+    
+    /**
+     * Palauttaa tietyn tuotteen id:n perusteella
+     * @param id monesko tuote
      * @return tuote paikasta i
      */
-    public Tuote annaTuote(int i) {
-        return this.tuotteet.anna(i);
+    public Tuote annaTuote(int id) {
+        return this.tuotteet.anna(id);
     }
-
+    
+    
+    /**
+     * Palauttaa allergeenin id:n perusteella
+     * @param id allergeenin id
+     * @return allergeeni paikasta i
+     */
+    public Allergeeni annaAllergeeni(int id) {
+        return this.allergeenit.anna(id);
+    }
+    
+    
+    /**
+     * Palauttaa listan tuotteen allergeeneista
+     * @param id tuotteen id
+     * @return palauttaa tuotteen allergeenit listana
+     */
+    public List<TuoteAllergeeni> annaTuotteenAllergeenit(int id ) {
+        return this.tuoteAllergeenit.annaTuotteenAllergeenit(id);
+    }
+    
     
     /**
      * @param args ei käytössä
