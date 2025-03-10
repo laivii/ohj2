@@ -5,7 +5,7 @@ import java.io.PrintStream;
 
 /**
  * @author Viivi
- * @version 24.2.2025
+ * @version 8.3.2025
  *
  */
 public class Ravintola {
@@ -21,6 +21,15 @@ public class Ravintola {
      */
     public Ravintola() {
         //ei edes tarvitsisi tätä
+    }
+    
+    
+    /**
+     * Alusteaan ravintola
+     * @param nimi ravintolan nimi
+     */
+    public Ravintola(String nimi) {
+        this.nimi = nimi;
     }
     
     
@@ -50,13 +59,13 @@ public class Ravintola {
      * @example
      * <pre name="test">
      *  Ravintola r = new Ravintola();
-     *  r.getId() === 0;
+     *  r.haeId() === 0;
      *  r.rekisteroi();
      *  Ravintola r2 = new Ravintola();
-     *  r2.getId() === 0;
+     *  r2.haeId() === 0;
      *  r2.rekisteroi();
-     *  int n1 = r.getId();
-     *  int n2 = r2.getId();
+     *  int n1 = r.haeId();
+     *  int n2 = r2.haeId();
      *  n2 === n1+1;
      * </pre>
      */
@@ -67,19 +76,18 @@ public class Ravintola {
     
     
     /**
-     * Asetetaan ravintolan nimi
-     * @param nimi ravintolan nimi
+     * @return palauttaa ravintolan id:n
      */
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
+    public int haeId() {
+        return this.id;
     }
     
     
     /**
-     * @return palauttaa ravintolan id:n
+     * @return ravintolan nimi
      */
-    public int getId() {
-        return this.id;
+    public String haeNimi() {
+        return this.nimi;
     }
   
     

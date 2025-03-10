@@ -2,7 +2,7 @@ package allergiainfo;
 
 /**
  * @author Viivi
- * @version 24.2.2025
+ * @version 8.3.2025
  *
  */
 public class Ravintolat {
@@ -24,19 +24,14 @@ public class Ravintolat {
      * Alustetaan ravintolat
      * @param ravintolat mihin taulukkoon lisätään
      */
-    public void setRavintolat(Ravintolat ravintolat) {
-        Ravintola r1 = new Ravintola();
-        Ravintola r2 = new Ravintola();
-        Ravintola r3 = new Ravintola();
+    public void taytaRavintolatTiedoilla(Ravintolat ravintolat) {
+        Ravintola r1 = new Ravintola("Taco Bell");
+        Ravintola r2 = new Ravintola("McDonald's");
+        Ravintola r3 = new Ravintola("Burger King");
         
         r1.rekisteroi();
-        r1.setNimi("Taco Bell");
-        
         r2.rekisteroi();
-        r2.setNimi("McDonald's");
-        
         r3.rekisteroi();
-        r3.setNimi("Burger King");
         
         try {
             ravintolat.lisaa(r1);
@@ -49,6 +44,7 @@ public class Ravintolat {
     
     
     /**
+     * Lisätään uusi ravintola taulukkoon
      * @param ravintola lisättävä ravintola
      * @throws SailoException jos liikaa alkioita
      * @example
@@ -58,11 +54,11 @@ public class Ravintolat {
      *  Ravintola r = new Ravintola();
      *  Ravintola r2 = new Ravintola();
      *  
-     *  ravintolat.getLkm()         === 0;
+     *  ravintolat.haeLkm()         === 0;
      *  
-     *  ravintolat.lisaa(r);        ravintolat.getLkm() === 1;
-     *  ravintolat.lisaa(r2);       ravintolat.getLkm() === 2;
-     *  ravintolat.lisaa(r);        ravintolat.getLkm() === 3;
+     *  ravintolat.lisaa(r);        ravintolat.haeLkm() === 1;
+     *  ravintolat.lisaa(r2);       ravintolat.haeLkm() === 2;
+     *  ravintolat.lisaa(r);        ravintolat.haeLkm() === 3;
      *  
      *  ravintolat.anna(0) === r;
      *  ravintolat.anna(1) === r2;
@@ -97,10 +93,32 @@ public class Ravintolat {
     
     
     /**
+     * Palauttaa ravintolan id:n perusteella
+     * @param id ravintolan id
+     * @return ravintolan
+     * @throws SailoException jos id:llä ei löydy ravintolaa
+     */
+    public Ravintola haeRavintolaIdlla( int id ) throws SailoException {
+        Ravintola ravintola = null;
+        
+        for( Ravintola r: alkiot ) {
+            if( r != null && r.haeId() == id ) {
+                ravintola = r;
+                break;
+            }
+        }
+        
+        if(ravintola == null ) throw new SailoException( "Ravintolaa ei löydetty annetulla id:llä " + id );
+        
+        return ravintola;
+    }
+    
+    
+    /**
      * Palauttaa ravintoloiden lukumäärän
      * @return ravintoloiden lukumäärä
      */
-    public int getLkm() {
+    public int haeLkm() {
         return this.lkm;
     }
     
@@ -111,11 +129,11 @@ public class Ravintolat {
     public static void main(String[] args ) {  
         Ravintolat ravintolat = new Ravintolat();
         
-        ravintolat.setRavintolat(ravintolat);
+        ravintolat.taytaRavintolatTiedoilla(ravintolat);
         
         System.out.println("=============== Ravintolat testi ===============");
         
-        for ( int i = 0; i < ravintolat.getLkm(); i++ ) {
+        for ( int i = 0; i < ravintolat.haeLkm(); i++ ) {
             Ravintola ravintola = ravintolat.anna( i );
             System.out.println("Ravintola indeksissä: " + i );
             ravintola.tulosta(System.out);
