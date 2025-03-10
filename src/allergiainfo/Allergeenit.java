@@ -67,6 +67,65 @@ public class Allergeenit {
     
     
     /**
+     * Alustetaan allergeenit
+     * @param allergeenit allergeeni lista johon lisätään
+     */
+    public void taytaAllergeenitTiedoilla(Allergeenit allergeenit) {
+        Allergeeni a1  = new Allergeeni("Gluteeni");
+        Allergeeni a2  = new Allergeeni("Maitotuotteet");
+        Allergeeni a3  = new Allergeeni("Laktoosi");
+        Allergeeni a4  = new Allergeeni("Kananmuna");
+        Allergeeni a5  = new Allergeeni("Soija");
+        Allergeeni a6  = new Allergeeni("Seesami");
+        Allergeeni a7  = new Allergeeni("Sinappi");
+        Allergeeni a8  = new Allergeeni("Selleri");
+        Allergeeni a9  = new Allergeeni("Kala");
+        Allergeeni a10 = new Allergeeni("Äyriäiset");
+        Allergeeni a11 = new Allergeeni("Pähkinät");
+        Allergeeni a12 = new Allergeeni("Maapähkinät");
+        Allergeeni a13 = new Allergeeni("Nilviäiset");
+        Allergeeni a14 = new Allergeeni("Lupiini");
+        Allergeeni a15 = new Allergeeni("Sulfiitit");
+        
+        a1.rekisteroi();
+        a2.rekisteroi();
+        a3.rekisteroi();
+        a4.rekisteroi();
+        a5.rekisteroi();
+        a6.rekisteroi();
+        a7.rekisteroi();
+        a8.rekisteroi();
+        a9.rekisteroi();
+        a10.rekisteroi();
+        a11.rekisteroi();
+        a12.rekisteroi();
+        a13.rekisteroi();
+        a14.rekisteroi();
+        a15.rekisteroi();
+        
+        try {
+            allergeenit.lisaa(a1);
+            allergeenit.lisaa(a2);
+            allergeenit.lisaa(a3);
+            allergeenit.lisaa(a4);
+            allergeenit.lisaa(a5);
+            allergeenit.lisaa(a6);
+            allergeenit.lisaa(a7);
+            allergeenit.lisaa(a8);
+            allergeenit.lisaa(a9);
+            allergeenit.lisaa(a10);
+            allergeenit.lisaa(a11);
+            allergeenit.lisaa(a12);
+            allergeenit.lisaa(a13);
+            allergeenit.lisaa(a14);
+            allergeenit.lisaa(a15);
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    
+    /**
      * Palauttaa tietyn allergeenin id:n perusteella
      * @param id allergeenin id
      * @return id:n perusteella rajatun allergeenin

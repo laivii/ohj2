@@ -26,6 +26,16 @@ public class Allergeeni {
     
     
     /**
+     * Alustetaan allergeeni
+     * @param nimi allergeenin nimi
+     */
+    public Allergeeni(String nimi) {
+        this.nimi = nimi;
+        this.yksiloivaNro = (int)(Math.random() * 9999);
+    }
+    
+    
+    /**
      * Rekisteröidään allergeeni, eli annetaan sille id
      * @example
      * <pre name="test">
@@ -59,6 +69,14 @@ public class Allergeeni {
      */
     public int haeId() {
         return this.id;
+    }
+    
+    
+    /**
+     * @return allergeenin nimi
+     */
+    public String haeNimi() {
+        return this.nimi;
     }
     
     
