@@ -90,7 +90,7 @@ public class AllergiainfoGUIController implements Initializable {
 	    tuote.taytaTuoteTiedoilla();
 	    
 	    try {
-            allergiainfo.lisaaTuote(tuote);
+            allergiainfo.lisaa(tuote);
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
             return;
