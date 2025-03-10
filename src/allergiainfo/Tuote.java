@@ -18,6 +18,7 @@ import java.io.PrintStream;
 public class Tuote {
     
     private         int      id               = 0;
+    private         int      ravintolaId      = 0;
     private         String   nimi             = "";
     private         int      yksiloivaNumero  = -1;
     
@@ -33,11 +34,20 @@ public class Tuote {
     
     
     /**
+     * Alustetaan tietyn ravintolan tuote
+     * @param ravintolaNro ravintolan viitenumero
+     */
+    public Tuote( int ravintolaNro ) {
+        this.ravintolaId = ravintolaNro;
+    }
+    
+    
+    /**
      * Tulostetaan tuotteen tiedot
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.yksiloivaNumero));
+        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.ravintolaId) + " " + String.format("%03d", this.yksiloivaNumero));
     }
     
     
@@ -79,6 +89,14 @@ public class Tuote {
         return this.id;
     }
     
+   
+    /**
+     * @return palauttaa tuotteen ravintolan id:n
+     */
+    public int haeRavintolaId() {
+        return this.ravintolaId;
+    }
+    
     
     /**
      * Apumetodi, jolla saadaan täytettyä testiarvot tuotteelle
@@ -86,6 +104,7 @@ public class Tuote {
     public void taytaTuoteTiedoilla() {
         this.nimi = "Quesadilla";
         this.yksiloivaNumero = (int)(Math.random()*9999);
+        this.ravintolaId = 1;
     }
     
     
