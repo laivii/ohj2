@@ -14,7 +14,7 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
     
     
     /**
-     * TuoteAllergeenien alustminen
+     * TuoteAllergeenien alustaminen
      */
     public TuoteAllergeenit() {
         // toistaiseksi ei tarvitse tehdä mitään
@@ -139,7 +139,6 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
         List<TuoteAllergeeni> tuoteAllergeenit = tat.annaTuotteenAllergeenit(1);
 
         for (TuoteAllergeeni ta : tuoteAllergeenit) {
-            System.out.print(ta.haeAllergeeniID() + " ");
             ta.tulosta(System.out);
         }
 
