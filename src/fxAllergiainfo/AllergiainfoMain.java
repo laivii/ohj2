@@ -31,6 +31,13 @@ public class AllergiainfoMain extends Application {
 			Allergiainfo allergiainfo = new Allergiainfo();
 			allergiainfoCtrl.setAllergiainfo(allergiainfo);
 			
+		     /*
+	         * Alustetaan valmiiksi ravintoloiden ja allergeenien tiedot
+	         * Näissä valmiit "vaihtoehdot" näitä ei voi lisätä uusina
+	         */
+	        allergiainfo.alustaRavintolat();
+	        allergiainfo.alustaAllergeenit();
+			
 			primaryStage.show();
 			
 		} catch(Exception e) {
