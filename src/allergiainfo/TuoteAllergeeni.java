@@ -8,7 +8,7 @@ import java.io.PrintStream;
  * - tietää tuoteAllergeenin kentät
  * - osaa tarkistaa kentän oikeellisuuden
  * @author Viivi
- * @version 7.3.2025
+ * @version 10.3.2025
  *
  */
 public class TuoteAllergeeni {

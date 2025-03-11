@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author Viivi
- * @version 8.3.2025
+ * @version 10.3.2025
  */
 public class Allergiainfo {
     

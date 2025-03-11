@@ -11,7 +11,7 @@ import allergiainfo.Allergiainfo;
 
 /**
  * @author Viivi
- * @version 6.3.2025
+ * @version 10.3.2025
  *
  */
 public class AllergiainfoMain extends Application {

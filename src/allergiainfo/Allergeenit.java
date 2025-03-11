@@ -2,7 +2,7 @@ package allergiainfo;
 
 /**
  * @author Viivi
- * @version 6.3.2025
+ * @version 10.3.2025
  *
  */
 public class Allergeenit {

@@ -12,7 +12,7 @@ import java.io.PrintStream;
  * Osaa laittaa merkkijonon tietyksi kentäksi
  * 
  * @author Viivi
- * @version 6.3.2025
+ * @version 10.3.2025
  *
  */
 public class Tuote {
