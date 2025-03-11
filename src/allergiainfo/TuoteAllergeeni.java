@@ -54,7 +54,7 @@ public class TuoteAllergeeni {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta( PrintStream out ) {
-        out.println(String.format( "%02d", this.tuoteId ) + " " + String.format( "%02d", this.allergeeniId ) + " " + String.format( "%03d",this.yksiloivaNro ));
+        out.println(String.format( "%03d", this.tuoteId ) + " " + String.format( "%03d", this.allergeeniId ) + " " + String.format( "%03d",this.yksiloivaNro ));
     }
     
     
