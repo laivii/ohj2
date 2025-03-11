@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import fi.jyu.mit.fxgui.ListChooser?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="500.0" minWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxAllergiainfo.AllergiainfoGUIController">
+<BorderPane minHeight="500.0" minWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxAllergiainfo.AllergiainfoGUIController">
    <center>
       <VBox minHeight="400.0" minWidth="500.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,7 +37,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="panelTuotteet" hbarPolicy="NEVER" minHeight="350.0" minWidth="500.0">
+            <ScrollPane fx:id="panelTuote" hbarPolicy="NEVER" minHeight="350.0" minWidth="500.0">
                <content>
                <VBox minHeight="350.0">
                      <children>
@@ -138,7 +139,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="deletep" mnemonicParsing="false" onAction="#poistaViimeinenTuote" text="Poista viimeinen tuote">
+                  <Button fx:id="addAllergen" mnemonicParsing="false" onAction="#lisaaAllergeeniValitulle" text="Lisää valitulle allergeeni">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -374,4 +375,7 @@
          </children>
       </HBox>
    </left>
+   <right>
+      <ListChooser fx:id="chooserTuotteet" rivit="Quesadilla&#10; Big Mac&#10;" BorderPane.alignment="CENTER" /> 
+   </right>
 </BorderPane>
