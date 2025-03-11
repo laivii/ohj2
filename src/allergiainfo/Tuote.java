@@ -89,6 +89,14 @@ public class Tuote {
         return this.id;
     }
     
+    
+    /**
+     * @return tuotteen nimi
+     */
+    public String haeNimi() {
+        return this.nimi;
+    }
+    
    
     /**
      * @return palauttaa tuotteen ravintolan id:n
