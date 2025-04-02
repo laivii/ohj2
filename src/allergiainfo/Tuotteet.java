@@ -1,5 +1,8 @@
 package allergiainfo;
 
+import java.io.*;
+import java.util.*;
+
 /**
  * Vastuut:
  * Pitää yllä varsinaista tuoterekisteriä, eli osaa lisätä ja poistaa tuotteen
@@ -10,7 +13,7 @@ package allergiainfo;
  * Tuote-luokka
  * 
  * @author Viivi
- * @version 8.3.2025
+ * @version 31.3.2025
  */
 public class Tuotteet {
     
@@ -223,13 +226,63 @@ public class Tuotteet {
     
     
     /**
+     * Tallentaa tuotteiston tiedostoon
+     * @param tiednimi tiedoston nimi (mihin tallennetaan)
+     * @throws SailoException jos tallennus epäonnistuu
+     * @example
+     * <pre name="test">
+     * TESTIT
+     * </pre>
+     */
+    public void tallenna(String tiednimi) throws SailoException {
+        File file = new File( tiednimi  + ".dat" );
+        
+        try(PrintStream fo = new PrintStream( new FileOutputStream( file, false ))) {
+            for( int i = 0; i < this.lkm; i++ ) {
+                Tuote tuote = this.alkiot[i];
+                fo.println( tuote );
+            }
+        } catch ( FileNotFoundException ex ) {
+            throw new SailoException("Tiedosto " + file.getAbsolutePath() + " ei aukea");
+        }
+    }
+    
+    
+    /**
+     * @param tiednimi tiedoston nimi
+     * @throws SailoException jos tiedostoa ei löydy
+     */
+    public void lueTiedostosta(String tiednimi) throws SailoException {
+        File file = new File( tiednimi + ".dat");
+        
+        try ( Scanner fi = new Scanner( new FileInputStream( file ))) {
+            while( fi.hasNext() ) {
+                String s = fi.nextLine();
+                Tuote tuote = new Tuote();
+                
+                tuote.parse( s );
+                lisaa( tuote );
+            }
+        } catch ( FileNotFoundException e ) {
+            throw new SailoException("Tiedoston avaaminen ei onnistunut " + file.getAbsolutePath());
+        }
+    }
+    
+    
+    /**
      * @param args ei käytössä
      */
     public static void main(String[] args) {
         Tuotteet tuotteet = new Tuotteet();
         
+        try {
+            tuotteet.lueTiedostosta("tuotteet");
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
+        }
+        
         Tuote t = new Tuote();
-        Tuote t2 = new Tuote();
+        Tuote t2 = new Tuote(3);
         
         t.rekisteroi();
         t.taytaTuoteTiedoilla();
@@ -256,6 +309,12 @@ public class Tuotteet {
         for( int i = 0; i < tuotteet.haeLkm(); i++) {
             Tuote tuote = tuotteet.anna(i);
             tuote.tulosta(System.out);
+        }
+        
+        try {
+            tuotteet.tallenna("tuotteet");
+        } catch (SailoException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

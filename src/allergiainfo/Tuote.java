@@ -3,6 +3,8 @@ package allergiainfo;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 /**
  * Vastuut:
  * Tietää tuotteen kentät (id, nimi, ravintolaId)
@@ -12,7 +14,7 @@ import java.io.PrintStream;
  * Osaa laittaa merkkijonon tietyksi kentäksi
  * 
  * @author Viivi
- * @version 10.3.2025
+ * @version 31.3.2025
  *
  */
 public class Tuote {
@@ -115,6 +117,55 @@ public class Tuote {
         this.ravintolaId = 1;
     }
     
+    
+    /**
+     * Asetetaan tunnusnumero
+     * @param tunnusNro tuotteen tunnusnumero
+     */
+    public void asetaId(int tunnusNro) {
+        this.id = tunnusNro;
+        if( tunnusNro >= seuraavaNro ) seuraavaNro = tunnusNro + 1;
+    }
+    
+    
+    /**
+     * Asetetaan ravintola id, eli yhdistetään tuote ravintolaan
+     * @param ravintola ravintolan tunnusnumero
+     */
+    public void asetaRavintola(int ravintola) {
+        this.ravintolaId = ravintola;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return haeId() + "|" + haeRavintolaId() + "|" + haeNimi();
+    }
+    
+    
+    /**
+     * Parsitaan tuotteen tiedot
+     * @param rivi josta tuotteen tiedot otetaan
+     * @example
+     * <pre name="test">
+     *  Tuote tuote = new Tuote();
+     *  tuote.parse( "4|1|Quesadilla" );
+     *  tuote.haeId() === 4;
+     *  tuote.toString().startsWith( "4|1|Quesadilla" ) === true;
+     *  
+     *  tuote.rekisteroi();
+     *  int n = tuote.haeId();
+     *  tuote.parse( "" + ( n + 20 )); 
+     *  tuote.rekisteroi();
+     *  tuote.haeId() === n + 20 + 1;
+     * </pre>
+     */
+    public void parse( String rivi ) {
+        StringBuilder sb = new StringBuilder( rivi );
+        asetaId( Mjonot.erota( sb, '|', haeId() ));
+        asetaRavintola( Mjonot.erota( sb, '|', haeRavintolaId() ));
+        this.nimi = Mjonot.erota( sb, '|', this.nimi );
+    }
     
     /**
      * @param args ei käytössä
