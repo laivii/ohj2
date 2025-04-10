@@ -3,6 +3,8 @@ package allergiainfo;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 /**
  * @author Viivi
  * @version 26.2.2025
@@ -12,9 +14,9 @@ public class Allergeeni {
     
     private        int      id            = 0;
     private        String   nimi          = "";
-    private        int      yksiloivaNro  = 0;
+    private        int      yksiloivaNro  = 0; //TODO poista kun ei enää tarvita
     
-    private static int      seuraavaNro   = 1;
+    private static int      seuraavaNro   = 0;
     
     
     /**
@@ -81,6 +83,25 @@ public class Allergeeni {
     
     
     /**
+     * Asetetaan allergeenin id
+     * @param i allergeenin id
+     */
+    public void asetaId( int i ) {
+        this.id = i;
+        if( i >= seuraavaNro ) seuraavaNro = i + 1;
+    }
+    
+    
+    /**
+     * Asetetaan allergeenin nimi
+     * @param n allergeenin nimi
+     */
+    public void asetaNimi ( String n ) {
+        this.nimi = n;
+    }
+    
+    
+    /**
      * Tulostetaan allergeenin tiedot
      * @param out tietovirta johon tulostetaan
      */
@@ -96,6 +117,36 @@ public class Allergeeni {
      */
     public void tulosta(OutputStream os) {
         tulosta( new PrintStream(os));
+    }
+    
+    
+    @Override
+    public String toString() {
+        return haeId() + "|" + haeNimi();
+    }
+    
+    
+    /**
+     * Parsitaan allergeenin tiedot
+     * @param rivi josta allergeenin tiedot otetaan
+     * @example
+     * <pre name="test">
+     *  Allergeeni allergeeni = new Allergeeni();
+     *  allergeeni.parse( "1|Gluteeni" );
+     *  allergeeni.haeId() === 1;
+     *  allergeeni.toString().startsWith( "1|Gluteeni" ) === true;
+     *  
+     *  allergeeni.rekisteroi();
+     *  int n = allergeeni.haeId();
+     *  allergeeni.parse( "" + ( n + 20 ));
+     *  allergeeni.rekisteroi();
+     *  allergeeni.haeId() === n + 20 + 1;
+     * </pre>
+     */
+    public void parse( String rivi ) {
+        StringBuilder sb = new StringBuilder( rivi );
+        asetaId( Mjonot.erota( sb, '|', haeId() ));
+        asetaNimi( Mjonot.erota( sb, '|', haeNimi() ));
     }
     
     

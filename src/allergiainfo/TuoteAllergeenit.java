@@ -1,5 +1,6 @@
 package allergiainfo;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -110,6 +111,48 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
         
         return loydetyt;
     }
+    
+    
+    /**
+     * Tallennetaan tuotteiden allergiatiedot tiedostoon
+     * @param tiednimi tiedoston nimi ( mihin tallennetaan )
+     * @throws SailoException jos tallennus epäonnistuu
+     */
+    public void tallenna( String tiednimi ) throws SailoException {
+        File file = new File( tiednimi + ".dat" );
+        
+        try ( PrintStream fo = new PrintStream( new FileOutputStream( file, false ))) {
+            
+            for( TuoteAllergeeni ta: alkiot ) {
+                fo.println( ta );
+            }
+            
+        } catch ( FileNotFoundException e ) {
+            throw new SailoException( "Tiedosto " + file.getAbsolutePath() + " ei aukea " + e.getMessage() );
+        }
+    }
+    
+    
+    /**
+     * @param tiednimi tiedoston nimi
+     * @throws SailoException jos tiedostoa ei löydy
+     */
+    public void lueTiedostosta( String tiednimi ) throws SailoException {
+        File file = new File( tiednimi + ".dat" );
+        
+        try( Scanner fi = new Scanner( new FileInputStream( file ))) {
+            while ( fi.hasNext() ) {
+                String s = fi.nextLine();
+                TuoteAllergeeni ta = new TuoteAllergeeni();
+                
+                ta.parse( s );
+                lisaa( ta );
+            }
+        } catch ( FileNotFoundException e ) {
+            throw new SailoException( "Tiedoston avaaminen ei onnistunut " + file.getAbsolutePath());
+        }
+        
+    }
 
  
     /**
@@ -118,15 +161,21 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
     public static void main(String[] args) {
         TuoteAllergeenit tat = new TuoteAllergeenit();
         
+        try {
+            tat.lueTiedostosta("tuoteAllergeenit");
+        } catch ( SailoException e ) {
+            System.err.println( e.getMessage() );
+        }
+        
         TuoteAllergeeni ta1 = new TuoteAllergeeni();
         TuoteAllergeeni ta2 = new TuoteAllergeeni();
         TuoteAllergeeni ta3 = new TuoteAllergeeni();
         TuoteAllergeeni ta4 = new TuoteAllergeeni();
         
         ta1.taytaTuoteAllergeeniTiedoilla(1,1);
-        ta2.taytaTuoteAllergeeniTiedoilla(1,2);
-        ta3.taytaTuoteAllergeeniTiedoilla(1,3);
-        ta4.taytaTuoteAllergeeniTiedoilla(1,4);
+        ta2.taytaTuoteAllergeeniTiedoilla(2,2);
+        ta3.taytaTuoteAllergeeniTiedoilla(3,3);
+        ta4.taytaTuoteAllergeeniTiedoilla(4,4);
 
         tat.lisaa(ta1);
         tat.lisaa(ta2);
@@ -140,6 +189,12 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
 
         for (TuoteAllergeeni ta : tuoteAllergeenit) {
             ta.tulosta(System.out);
+        }
+        
+        try {
+            tat.tallenna( "tuoteAllergeenit" );
+        } catch ( SailoException e ) {
+            System.err.println( e.getMessage());
         }
 
     }

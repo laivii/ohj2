@@ -31,7 +31,8 @@ public class Tuote {
      * Alustaa tuotteen tiedot tyhjiksi
      */
     public Tuote() {
-        // ei edes tarvitsisi
+        //TODO Poista numeron generointi
+        this.yksiloivaNumero = (int)(Math.random()*9999);
     }
     
     
@@ -139,7 +140,7 @@ public class Tuote {
     
     @Override
     public String toString() {
-        return haeId() + "|" + haeRavintolaId() + "|" + haeNimi();
+        return haeId() + "|" + haeRavintolaId() + "|" + haeNimi() + "|" + this.yksiloivaNumero;
     }
     
     

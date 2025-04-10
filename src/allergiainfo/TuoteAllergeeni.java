@@ -3,6 +3,8 @@ package allergiainfo;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 /**
  * Vastuut:
  * - tietää tuoteAllergeenin kentät
@@ -82,6 +84,69 @@ public class TuoteAllergeeni {
      */
     public int haeAllergeeniID() {
         return this.allergeeniId;
+    }
+    
+    
+    /**
+     * TODO Poista kun muuttunut "turhaksi"
+     * Apu metodi
+     * @return TA yksilöivä numero, jolla erottaa toisista
+     */
+    public int haeYksiloivaNro() {
+        return this.yksiloivaNro;
+    }
+    
+    
+    /**
+     * Asetetaan tuotteen id
+     * @param id tuotteen id
+     */
+    public void asetaTuoteID(int id) {
+        this.tuoteId = id;
+    }
+    
+    
+    /**
+     * Asetetaan allergeenin id
+     * @param id allergeenin id
+     */
+    public void asetaAllergeeniID( int id ) {
+        this.allergeeniId = id;
+    }
+    
+    
+    /**
+     * TODO Poista kun muuttuu turhaksi (demojen takia lisätty apumetodi)
+     * Asetetaan yksilöivä numero
+     * @param nro yksilöllinen numero
+     */
+    public void asetaYksiloivaNro( int nro ) {
+        this.yksiloivaNro = nro;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return haeTuoteID() + "|" + haeAllergeeniID() + "|" + haeYksiloivaNro();
+    }
+    
+    
+    /**
+     * Parsitaan TuoteAllergeenin tiedot
+     * @param rivi josta TuoteAllergeenin tiedot otetaan
+     * @example
+     * <pre name="test">
+     *  TuoteAllergeeni ta = new TuoteAllergeeni();
+     *  ta.parse( "1|1|1234" );
+     *  ta.haeTuoteID() === 1;
+     *  ta.toString().startsWith( "1|1|1234" ) === true;
+     * </pre>
+     */
+    public void parse( String rivi ) {
+        StringBuilder sb = new StringBuilder( rivi );
+        asetaTuoteID( Mjonot.erota( sb, '|', haeTuoteID()) );
+        asetaAllergeeniID( Mjonot.erota( sb, '|', haeAllergeeniID() ));
+        asetaYksiloivaNro( Mjonot.erota( sb, '|', (int)( Math.random()*9999 )));
     }
     
     

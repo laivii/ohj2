@@ -36,10 +36,16 @@ public class AllergiainfoMain extends Application {
 	         * Näissä valmiit "vaihtoehdot" näitä ei voi lisätä uusina
 	         */
 	        allergiainfo.alustaRavintolat();
-	        allergiainfo.alustaAllergeenit();
 			
 			primaryStage.show();
 			
+            allergiainfoCtrl.lueTiedostosta();
+            
+            //Tallennetaan ennen sulkemista
+            primaryStage.setOnCloseRequest( event -> {
+                allergiainfoCtrl.tallenna();
+            });
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

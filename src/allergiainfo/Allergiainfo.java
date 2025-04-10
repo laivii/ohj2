@@ -183,11 +183,102 @@ public class Allergiainfo {
     
     
     /**
+     * 
+     * @throws SailoException jos joku menee pieleen
+     * @example
+     * <pre name="test">
+     *  TESTIT
+     * </pre>
+     */
+    public void lueTiedostosta() throws SailoException {
+        tuotteet         = new Tuotteet();
+        tuoteAllergeenit = new TuoteAllergeenit();
+        allergeenit      = new Allergeenit();
+        //Ravintolat ei ns. käytössä lisätään myöhemmin
+        // ravintolat = new Ravintolat();
+        
+        tuotteet.lueTiedostosta("tuotteet");
+        tuoteAllergeenit.lueTiedostosta("tuoteAllergeenit");
+        allergeenit.lueTiedostosta("allergeenit");
+        //ravintolat.lueTiedostosta("ravintolat");
+    }
+    
+    
+    /**
+     * Tallentaa allergiainfon tiedot tiedostoon
+     * @throws SailoException jos tallentamisessa ongelmia 
+     */
+    public void tallenna() throws SailoException {
+        String virhe = "";
+        
+        try {
+            tuotteet.tallenna("tuotteet");
+        } catch (SailoException e ) {
+            virhe = e.getMessage();
+        }
+        
+        try {
+            tuoteAllergeenit.tallenna("tuoteAllergeenit");
+        } catch (SailoException e ) {
+            virhe = e.getMessage();
+        }
+        
+        //Tämä vähän turha, koska tällähetkellä ei voida lisätä uusia allergeeneja
+        try {
+            allergeenit.tallenna("allergeenit");
+        } catch (SailoException e ) {
+            virhe = e.getMessage();
+        }
+        
+        //Ravintolat ei vielä ns. käytössä voidaan lisätä myöhemmin
+//        try {
+//            ravintolat.tallenna("ravintolat");
+//        } catch (SailoException e ) {
+//            virhe = e.getMessage();
+//        }
+        
+        if( !"".equals( virhe ) ) throw new SailoException( virhe );
+    }
+    
+    
+    /**
+     * Tallennetaan tuotteet tiedostoon
+     * @throws SailoException jos tallentamisessa ongelma
+     */
+    public void tallennaTuotteet() throws SailoException {
+        try {
+            tuotteet.tallenna("tuotteet");
+        } catch (SailoException e ) {
+            throw new SailoException("Tuotteiden tallentamisessa ongelma! " + e.getMessage());
+        }
+    }
+    
+    
+    /**
+     * Tallennetaan TuoteAllergeenit tiedostoon
+     * @throws SailoException jos tallentamisessa ongelmia
+     */
+    public void tallennaTuoteAllergeenit() throws SailoException {
+        try {
+            tuoteAllergeenit.tallenna("tuoteAllergeenit");
+        } catch (SailoException e ) {
+            throw new SailoException("TuoteAllergeenien tallentamisessa ongelma! " + e.getMessage());
+        }
+    }
+    
+    
+    /**
      * Testataan Allergiainfo luokkaa
      * @param args ei käytössä
      */
     public static void main(String[] args) {
         Allergiainfo ai = new Allergiainfo();
+        
+        try {
+            ai.lueTiedostosta();
+        } catch (SailoException e) {
+            System.err.println( e.getMessage());
+        }
         
         System.out.println("Allergiainfon ravintolat: ");
         
@@ -210,9 +301,12 @@ public class Allergiainfo {
         }
         
         System.out.println("\nAllergiainfon tuotteet:");
-        t.tulosta(System.out);
+        for( int i = 0; i < ai.haeTuotteita(); i++ ) {
+            Tuote tuote = ai.annaTuote( i );
+            tuote.tulosta(System.out);
+        }
         
-        ai.alustaAllergeenit();
+//        ai.alustaAllergeenit();
         
         System.out.println("\nAllergiainfon allergeenit:");
         for( int i = 0; i < ai.haeAllergeeneja(); i++ ) {

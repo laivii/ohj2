@@ -2,6 +2,7 @@ package fxAllergiainfo;
 
 import java.net.URL;
 import java.io.PrintStream;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -70,6 +71,40 @@ public class AllergiainfoGUIController implements Initializable {
 	private Tuote tuoteKohdalla;
 	
 	
+	/**
+	 * Alustetaan allergiainfo lukemalla tiedot tiedostosta
+	 * @return null jos lukeminen onnistuu, muuten virhe tekstinä (popup)
+	 */
+	protected String lueTiedostosta() {
+	    try {
+            allergiainfo.lueTiedostosta();
+            hae(0);
+            return null;
+        } catch (SailoException e) {
+           hae(0);
+           String virhe = e.getMessage();
+           
+           if( virhe != null ) Dialogs.showMessageDialog( virhe );
+           return virhe;
+        }
+	}
+	
+	
+    /**
+     * Tietojen tallennus
+     * @return null jos onnistuu, muuten virhe tekstinä
+     */
+	public String tallenna() {
+	    try {
+            allergiainfo.tallenna();
+            return null;
+        } catch (SailoException e) {
+            Dialogs.showMessageDialog("Tallennuksessa virhe! " + e.getMessage());
+            return e.getMessage();
+        }
+	}
+	
+	
 	
 	/**
 	 * Asetetaan käytettävä allergiainfo
@@ -83,7 +118,7 @@ public class AllergiainfoGUIController implements Initializable {
 	/**
 	 * Alustetaan tekstialue
 	 */
-	private void alusta() {
+	private void alusta() {	    
 	    panelTuote.setContent(areaTuote);
 	    areaTuote.setFont(new Font("Courier New", 12));
 	    areaTuote.setEditable(false);
@@ -100,7 +135,10 @@ public class AllergiainfoGUIController implements Initializable {
 	private void naytaTuote() {
 	    tuoteKohdalla = chooserTuotteet.getSelectedObject();
 	    
-	    if( tuoteKohdalla == null ) return;
+	    if( tuoteKohdalla == null ) {
+	        areaTuote.clear();
+	        return;
+	    }
 	    
 	    areaTuote.setText("");
 	    try( PrintStream os = TextAreaOutputStream.getTextPrintStream(areaTuote)){
@@ -112,7 +150,7 @@ public class AllergiainfoGUIController implements Initializable {
 	 * Hakee tuotteiden tiedot listaan
 	 * @param tuoteID haettavan tuotteen id
 	 */
-	private void hae( int tuoteID ) {
+	private void hae( int tuoteID ) {	    
 	    chooserTuotteet.clear();
 	    
 	    int index = 0;
@@ -142,6 +180,12 @@ public class AllergiainfoGUIController implements Initializable {
         }
 	    
 	    hae(tuote.haeId());
+	    
+	    try {
+            allergiainfo.tallennaTuotteet();
+        } catch (SailoException e) {
+           System.err.println( e.getMessage() );
+        }
 	}
 	
 
@@ -150,7 +194,7 @@ public class AllergiainfoGUIController implements Initializable {
 	 */
     private void lisaaTuoteAllergeeni() {
         /*
-         * allergeeneja 15 eri, joten demossa voidaan valita random 1-15
+         * allergeeneja 15 eri, joten demossa voidaan valita random 0-14
          * TODO katso ettei allergeeni ole jo yhdistetty tuotteeseen
          */
         int allergeeniID = (int)(Math.random()* 15);
@@ -159,6 +203,12 @@ public class AllergiainfoGUIController implements Initializable {
         allergiainfo.lisaa(tuoteID, allergeeniID);
         
         naytaTuote();
+        
+        try {
+            allergiainfo.tallennaTuoteAllergeenit();
+        } catch (SailoException e) {
+            System.err.println( e.getMessage() );
+        }
     }
     
     

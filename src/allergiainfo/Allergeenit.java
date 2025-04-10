@@ -1,5 +1,8 @@
 package allergiainfo;
 
+import java.io.*;
+import java.util.*;
+
 /**
  * @author Viivi
  * @version 10.3.2025
@@ -190,29 +193,55 @@ public class Allergeenit {
     
     
     /**
+     * @param tiednimi tiedoston nimi
+     * @throws SailoException jos tiedostoa ei löydy
+     */
+    public void lueTiedostosta( String tiednimi ) throws SailoException {
+        File file = new File( tiednimi + ".dat" );
+        
+        try( Scanner fi = new Scanner( new FileInputStream( file ))){
+            while( fi.hasNext()) {
+                String s = fi.nextLine();
+                Allergeeni allergeeni = new Allergeeni();
+                
+                allergeeni.parse( s );
+                lisaa( allergeeni );
+            }
+        } catch ( FileNotFoundException e ) {
+            throw new SailoException( "Tiedoston avaaminen ei onnistunut " + file.getAbsolutePath() );
+        }
+    }
+    
+    
+    /**
+     * @param tiednimi tiedoston nimi
+     * @throws SailoException jos tallennus epäonnistuu
+     */
+    public void tallenna( String tiednimi ) throws SailoException {
+        File file = new File( tiednimi + ".dat" );
+        
+        try( PrintStream fo = new PrintStream( new FileOutputStream( file, false))) {
+            for( int i = 0; i < this.lkm; i++ ) {
+                Allergeeni allergeeni = this.alkiot[ i ];
+                fo.println( allergeeni );
+            }
+        } catch ( FileNotFoundException ex ) {
+            throw new SailoException("Tiedosto " + file.getAbsolutePath() + " ei aukea");
+        }
+    }
+    
+    
+    /**
      * Allergeenit luokan testaus
      * @param args ei käytössä
      */
     public static void main(String[] args ) {
         Allergeenit allergeenit = new Allergeenit();
         
-        Allergeeni a1 = new Allergeeni();
-        Allergeeni a2 = new Allergeeni();
-        Allergeeni a3 = new Allergeeni();
-        
-        a1.rekisteroi();
-        a1.taytaAllergeeniTiedoilla();
-        a2.rekisteroi();
-        a2.taytaAllergeeniTiedoilla();
-        a3.rekisteroi();
-        a3.taytaAllergeeniTiedoilla();
-        
         try {
-            allergeenit.lisaa(a1);
-            allergeenit.lisaa(a2);
-            allergeenit.lisaa(a3);
-        } catch (SailoException e) {
-            System.err.println( e.getMessage());
+            allergeenit.lueTiedostosta("allergeenit");
+        } catch ( SailoException e ) {
+            System.err.println( e.getMessage() );
         }
         
         System.out.println("=============== Allergeenit testi ===============");
@@ -220,6 +249,12 @@ public class Allergeenit {
         for( int i = 0; i < allergeenit.haeLkm(); i++ ) {
             Allergeeni allergeeni = allergeenit.anna( i );
             allergeeni.tulosta(System.out);
+        }
+        
+        try {
+            allergeenit.tallenna("allergeenit");
+        } catch ( SailoException e ) {
+            System.err.println( e.getMessage() );
         }
     }
 }
