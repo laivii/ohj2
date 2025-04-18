@@ -23,7 +23,7 @@ public class AllergiainfoMain extends Application {
 			final AllergiainfoGUIController allergiainfoCtrl = (AllergiainfoGUIController)ldr.getController();
 			
 			
-			final Scene scene = new Scene(root,750,500);
+			final Scene scene = new Scene(root,800,500);
 			scene.getStylesheets().add(getClass().getResource("allergiainfo.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Allergiainfo");

@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="500.0" minWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxAllergiainfo.AllergiainfoGUIController">
+<BorderPane minHeight="500.0" minWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxAllergiainfo.AllergiainfoGUIController">
    <center>
       <VBox minHeight="400.0" minWidth="500.0" BorderPane.alignment="CENTER">
          <children>
@@ -37,86 +37,21 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="panelTuote" hbarPolicy="NEVER" minHeight="350.0" minWidth="500.0">
+            <ScrollPane fx:id="panelTuotteet" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" minHeight="350.0" minWidth="350.0">
                <content>
-               <VBox minHeight="350.0">
-                     <children>
-                        <VBox>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quesadilla | Taco Bell">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sisältää: Gluteeni, Maitotuotteet, Laktoosi, Kananmuna " wrappingWidth="400.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </VBox>
-                        <VBox minWidth="400.0">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Taco Supreme, Crunchy | Taco Bell">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sisältää: Maitotuotteet, Laktoosi">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saattaa sisältää: Gluteeni, Soija">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </VBox>
-                        <VBox>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bic Mac | McDonald's">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sisältää: Gluteeni, Maitotuotteet, Laktoosi, Kananmuna, Seesami, Sinappi" wrappingWidth="400.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </VBox>
-                     </children>
-                  </VBox>
+               	<VBox fx:id="tuotteetVBox" minWidth="350.0">
+               	 <Text text="Ei löydetty tuotteita!">
+               	   <font>
+               	    <Font size="16.0" />
+               	   </font>
+               	   <VBox.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               	   </VBox.margin>
+               	 </Text>
+               	  <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               	</VBox>
                </content>
             </ScrollPane>
          </children>
@@ -131,26 +66,13 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT" prefWidth="500.0">
                <children>
-                  <Button fx:id="addnewp" mnemonicParsing="false" onAction="#lisaaUusiTuote" text="Lisää uusi tuote">
+                  <Button fx:id="addnewp" mnemonicParsing="false" onAction="#avaaLisaaTuote" text="Lisää uusi tuote">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="addAllergen" mnemonicParsing="false" onAction="#lisaaAllergeeniValitulle" text="Lisää valitulle allergeeni">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="pmanage" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#avaaTuotteidenhallinta" text="Hallitse tuotteita">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
                   </Button>
                </children>
                <padding>
@@ -161,9 +83,9 @@
       </VBox>
    </bottom>
    <left>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="200.0">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="250.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suodatus">
                      <font>
@@ -173,23 +95,18 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField fx:id="searchField" promptText="Hae tuotteita...">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <MenuButton fx:id="searchTermCB" mnemonicParsing="false" text="Valitse hakuperuste">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Tuote" />
-                      <MenuItem mnemonicParsing="false" text="Ravintola" />
-                    </items>
-                     <VBox.margin>
-                        <Insets bottom="16.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </MenuButton>
+                  <HBox>
+	                  <TextField fx:id="searchField" onAction="#haku" promptText="Hae tuotteita...">
+	                     <font>
+	                        <Font size="16.0" />
+	                     </font>
+	                  </TextField>
+	                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#haku" text="Hae" minWidth="50">
+		                  <font>
+	                        <Font size="16.0" />
+	                      </font>
+	                  </Button>
+                  </HBox>
                   <Accordion>
                     <panes>
                       <TitledPane animated="false" text="Allergiat">
@@ -201,7 +118,7 @@
                                  <content>
                                     <VBox>
                                        <children>
-                                          <CheckBox mnemonicParsing="false" text="Maitotuotteet">
+                                          <CheckBox fx:id="cbGluteeni" onAction="#suodata" mnemonicParsing="false" text="Gluteeni" userData="0">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -209,7 +126,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Laktoosi">
+                                          <CheckBox fx:id="cbMaito" onAction="#suodata" mnemonicParsing="false" text="Maitotuotteet" userData="1">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -217,7 +134,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Kananmuna">
+                                          <CheckBox fx:id="cbLaktoosi" onAction="#suodata" mnemonicParsing="false" text="Laktoosi" userData="2">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -225,7 +142,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Soija">
+                                          <CheckBox fx:id="cbMuna" onAction="#suodata" mnemonicParsing="false" text="Kananmuna"  userData="3">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -233,7 +150,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Seesami">
+                                          <CheckBox fx:id="cbSoija" onAction="#suodata" mnemonicParsing="false" text="Soija" userData="4">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -241,7 +158,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Sinappi">
+                                          <CheckBox fx:id="cbSeesami" onAction="#suodata" mnemonicParsing="false" text="Seesami" userData="5">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -249,7 +166,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Selleri">
+                                          <CheckBox fx:id="cbSinappi" onAction="#suodata" mnemonicParsing="false" text="Sinappi" userData="6">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -257,7 +174,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Kala">
+                                          <CheckBox fx:id="cbSelleri" onAction="#suodata" mnemonicParsing="false" text="Selleri" userData="7">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -265,7 +182,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Äyriäiset">
+                                          <CheckBox fx:id="cbKala" onAction="#suodata" mnemonicParsing="false" text="Kala" userData="8">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -273,7 +190,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Pähkinät">
+                                          <CheckBox fx:id="cbAyriaiset" onAction="#suodata" mnemonicParsing="false" text="Äyriäiset" userData="9">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -281,7 +198,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Maapähkinät">
+                                          <CheckBox fx:id="cbPahkinat" onAction="#suodata" mnemonicParsing="false" text="Pähkinät" userData="10">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -289,7 +206,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Nilviäiset">
+                                          <CheckBox fx:id="cbMaapahkina" onAction="#suodata" mnemonicParsing="false" text="Maapähkinät" userData="11">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -297,7 +214,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Lupiini">
+                                          <CheckBox fx:id="cbNilviaiset" onAction="#suodata" mnemonicParsing="false" text="Nilviäiset" userData="12">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -305,7 +222,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Sulfiitit">
+                                          <CheckBox fx:id="cbLupiini" onAction="#suodata" mnemonicParsing="false" text="Lupiini" userData="13">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -313,41 +230,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </CheckBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </VBox>
-                                 </content>
-                              </ScrollPane>
-                           </content>
-                        </TitledPane>
-                      <TitledPane animated="false" text="Ravintolat">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <content>
-                              <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
-                                 <content>
-                                    <VBox>
-                                       <children>
-                                          <CheckBox mnemonicParsing="false" text="Taco Bell">
-                                             <padding>
-                                                <Insets bottom="5.0" top="5.0" />
-                                             </padding>
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="McDonalds">
-                                             <padding>
-                                                <Insets bottom="5.0" top="5.0" />
-                                             </padding>
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </CheckBox>
-                                          <CheckBox mnemonicParsing="false" text="Burger King">
+                                          <CheckBox fx:id="cbSulfiitit" onAction="#suodata" mnemonicParsing="false" text="Sulfiitit" userData="14">
                                              <padding>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </padding>
@@ -375,7 +258,4 @@
          </children>
       </HBox>
    </left>
-   <right>
-      <ListChooser fx:id="chooserTuotteet" rivit="Quesadilla&#10; Big Mac&#10;" BorderPane.alignment="CENTER" /> 
-   </right>
 </BorderPane>
