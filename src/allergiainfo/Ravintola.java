@@ -98,6 +98,12 @@ public class Ravintola {
         this.nimi = "Taco Bell";
     }
     
+    
+    @Override
+    public String toString() {
+        return this.nimi;
+    }
+    
     /**
      * @param args ei käytössä
      */
