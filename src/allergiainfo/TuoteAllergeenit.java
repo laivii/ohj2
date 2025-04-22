@@ -28,7 +28,43 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
      */
     public void lisaa( TuoteAllergeeni ta ) {
         alkiot.add( ta );
-    }   
+    } 
+    
+    
+    /**
+     * Poistetaan TuoteAllergeeni tietorakenteesta.
+     * @param ta poistettava TuoteAllergeeni
+     * @example
+     * <pre name="test">
+     *  TuoteAllergeenit tat = new TuoteAllergeenit();
+     *  TuoteAllergeeni laktoosi  = new TuoteAllergeeni(1,1); tat.lisaa(laktoosi);
+     *  TuoteAllergeeni kananmuna = new TuoteAllergeeni(1,2); tat.lisaa(kananmuna);
+     *  
+     *  tat.haeTuoteAllergeeneja() === 2;
+     *  Iterator<TuoteAllergeeni> i3 = tat.iterator();
+     *  i3.next() === laktoosi;
+     *  i3.next() === kananmuna;
+     *  
+     *  tat.poista(laktoosi);
+     *  
+     *  tat.haeTuoteAllergeeneja() === 1;
+     *  Iterator<TuoteAllergeeni> i4 = tat.iterator();
+     *  i4.next() === kananmuna;
+     *  i4.next() === laktoosi;  #THROWS NoSuchElementException
+     * </pre>
+     */
+    public void poista( TuoteAllergeeni ta ) {
+        alkiot.remove( ta );
+    }
+    
+    
+    /**
+     * Palautetaan listan alkioiden määrä
+     * @return alkioiden määrä listalla
+     */
+    public int haeTuoteAllergeeneja() {
+        return alkiot.size();
+    }
     
 
     /**
