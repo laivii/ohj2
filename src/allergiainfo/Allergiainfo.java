@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * @author Viivi
  * @version 10.3.2025
+ * @version 18.4.2025
  */
 public class Allergiainfo {
     
@@ -12,6 +13,9 @@ public class Allergiainfo {
     private Allergeenit      allergeenit      = new Allergeenit();
     private TuoteAllergeenit tuoteAllergeenit = new TuoteAllergeenit();
     private Ravintolat       ravintolat       = new Ravintolat();
+    
+//  Paikka muokattavan tuotteen "säilyttämiselle"
+    private Tuote            muokattava       = null;
     
     
     /**
@@ -64,6 +68,15 @@ public class Allergiainfo {
      */
     public void poistaViimeinenTuote() {
         this.tuotteet.poistaViimeinen();
+    }
+    
+    
+    /**
+     * Poistetaan TuoteAllergeeni
+     * @param ta TuoteAllergeeni, joka halutaan poistaa
+     */
+    public void poistaTuoteAllergeeni( TuoteAllergeeni ta ) {
+        this.tuoteAllergeenit.poista( ta );
     }
     
     
@@ -133,6 +146,24 @@ public class Allergiainfo {
      */
     public Ravintola haeRavintolaIdlla( int id ) throws SailoException {
         return this.ravintolat.haeRavintolaIdlla( id );
+    }
+    
+    
+    /**
+     * Palauttaa muokattavan tuotteen
+     * @return muokattava tuote
+     */
+    public Tuote haeMuokattava() {
+        return this.muokattava;
+    }
+    
+    
+    /**
+     * Asetetaan tuote "säilöön"
+     * @param t asetettava (muokattava) tuote (tai null kun muokkaus valmis)
+     */
+    public void asetaMuokattava( Tuote t ) {
+        this.muokattava = t;
     }
     
     
