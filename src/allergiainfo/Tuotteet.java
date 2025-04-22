@@ -34,11 +34,8 @@ public class Tuotteet {
     /**
      * Lisätään uusi tuote taulukkoon
      * @param tuote joka halutaan lisätä taulukkoon
-     * @throws SailoException poikkeus
      * @example
-     * <pre name="test">
-     *  #THROWS SailoException
-     *  
+     * <pre name="test">  
      *  Tuotteet tuotteet = new Tuotteet();
      *  
      *  Tuote t = new Tuote();
@@ -59,11 +56,19 @@ public class Tuotteet {
      *  
      *  tuotteet.lisaa(t);  tuotteet.haeLkm() === 4;
      *  tuotteet.lisaa(t2); tuotteet.haeLkm() === 5;
-     *  tuotteet.lisaa(t); #THROWS SailoException
      * </pre> 
      */
-    public void lisaa(Tuote tuote) throws SailoException {
-        if( this.lkm >= this.alkiot.length ) throw new SailoException("Liikaa tuotteita");
+    public void lisaa(Tuote tuote) {
+        if( this.lkm >= this.alkiot.length ) {
+            Tuote[] uusilista = new Tuote[ lkm * 2 ];
+            
+            for( int i = 0; i < this.alkiot.length; i++ ) {
+                uusilista[ i ] = this.alkiot[ i ];
+            }
+            
+            this.alkiot = uusilista;
+        }
+        
         this.alkiot[lkm] = tuote;
         this.lkm++;
     }
@@ -145,7 +150,7 @@ public class Tuotteet {
         
         if( index == -1 ) return;
         
-        Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
+        Tuote[] uusiLista = new Tuote[alkiot.length];
         
         for( int i = 0, j = 0; i < this.alkiot.length; i++ ) {
             if( i != index ) {
@@ -156,6 +161,12 @@ public class Tuotteet {
         
         this.alkiot = uusiLista;
         this.lkm -= 1;
+        
+        try {
+            tallenna("tuotteet");
+        } catch (SailoException e) {
+            System.err.println( e.getMessage() );
+        }
     }
     
     
@@ -229,10 +240,6 @@ public class Tuotteet {
      * Tallentaa tuotteiston tiedostoon
      * @param tiednimi tiedoston nimi (mihin tallennetaan)
      * @throws SailoException jos tallennus epäonnistuu
-     * @example
-     * <pre name="test">
-     * TESTIT
-     * </pre>
      */
     public void tallenna(String tiednimi) throws SailoException {
         File file = new File( tiednimi  + ".dat" );
@@ -289,13 +296,8 @@ public class Tuotteet {
         t2.rekisteroi();
         t2.taytaTuoteTiedoilla();
         
-        try {
-            tuotteet.lisaa(t);
-            tuotteet.lisaa(t2);
-        } catch (SailoException e) {
-             System.err.println(e.getMessage());
-        }
-        
+        tuotteet.lisaa(t);
+        tuotteet.lisaa(t2);
         
         System.out.println("=============== Tuotteet testi ===============");
         
