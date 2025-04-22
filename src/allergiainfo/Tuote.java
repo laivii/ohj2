@@ -22,7 +22,6 @@ public class Tuote {
     private         int      id               = 0;
     private         int      ravintolaId      = 0;
     private         String   nimi             = "";
-    private         int      yksiloivaNumero  = -1;
     
     private static  int      seuraavaNro      = 1;
     
@@ -31,8 +30,7 @@ public class Tuote {
      * Alustaa tuotteen tiedot tyhjiksi
      */
     public Tuote() {
-        //TODO Poista numeron generointi
-        this.yksiloivaNumero = (int)(Math.random()*9999);
+        //
     }
     
     
@@ -50,7 +48,7 @@ public class Tuote {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.ravintolaId) + " " + String.format("%03d", this.yksiloivaNumero));
+        out.println(String.format("%03d", this.id) + " " + this.nimi + " " + String.format("%03d", this.ravintolaId));
     }
     
     
@@ -114,7 +112,6 @@ public class Tuote {
      */
     public void taytaTuoteTiedoilla() {
         this.nimi = "Quesadilla";
-        this.yksiloivaNumero = (int)(Math.random()*9999);
         this.ravintolaId = 1;
     }
     
@@ -130,6 +127,15 @@ public class Tuote {
     
     
     /**
+     * Asetetaan nimi
+     * @param n tuotteen nimi
+     */
+    public void asetaNimi( String n ) {
+        this.nimi = n;
+    }
+    
+    
+    /**
      * Asetetaan ravintola id, eli yhdistetään tuote ravintolaan
      * @param ravintola ravintolan tunnusnumero
      */
@@ -140,7 +146,7 @@ public class Tuote {
     
     @Override
     public String toString() {
-        return haeId() + "|" + haeRavintolaId() + "|" + haeNimi() + "|" + this.yksiloivaNumero;
+        return haeId() + "|" + haeRavintolaId() + "|" + haeNimi();
     }
     
     
@@ -165,7 +171,7 @@ public class Tuote {
         StringBuilder sb = new StringBuilder( rivi );
         asetaId( Mjonot.erota( sb, '|', haeId() ));
         asetaRavintola( Mjonot.erota( sb, '|', haeRavintolaId() ));
-        this.nimi = Mjonot.erota( sb, '|', this.nimi );
+        asetaNimi( Mjonot.erota( sb, '|', this.nimi ));
     }
     
     /**
