@@ -106,9 +106,9 @@
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -139,91 +139,91 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="gluteeni" userData="0" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Maitotuotteet" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="maitotuotteet" userData="1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Laktoosi" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="laktoosi" userData="2" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Kananmuna" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="kananmuna" userData="3" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Soija" GridPane.rowIndex="5">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="soija" userData="4" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Seesami" GridPane.rowIndex="6">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="seesami" userData="5" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="Sinappi" GridPane.rowIndex="7">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <CheckBox fx:id="sinappi" userData="6" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label text="Selleri" GridPane.rowIndex="8">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <CheckBox fx:id="selleri" userData="7" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label text="Kala" GridPane.rowIndex="9">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <CheckBox fx:id="kala" userData="8" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <Label text="Äyriäiset" GridPane.rowIndex="10">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <CheckBox fx:id="ayriaiset" userData="9" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                         <Label text="Pähkinät" GridPane.rowIndex="11">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <CheckBox fx:id="pahkinat" userData="10" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                         <Label text="Maapähkinät" GridPane.rowIndex="12">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <CheckBox fx:id="maapahkinat" userData="11" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                         <Label text="Nilviäiset" GridPane.rowIndex="13">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <CheckBox fx:id="nilviaiset" userData="12" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                         <Label text="Lupiini" GridPane.rowIndex="14">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                        <CheckBox fx:id="lupiini" userData="13" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                         <Label text="Sulfiitit" GridPane.rowIndex="15">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <CheckBox fx:id="sulfiitit" userData="14" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                      </children>
                   </GridPane>
                </children>
@@ -245,7 +245,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="AddNewBtn" defaultButton="true" mnemonicParsing="false" onAction="#handleAddNewProduct" text="Lisää tuote">
+                  <Button fx:id="AddNewBtn" defaultButton="true" mnemonicParsing="false" onAction="#addNewProduct" text="Lisää tuote">
                      <font>
                         <Font size="16.0" />
                      </font>
