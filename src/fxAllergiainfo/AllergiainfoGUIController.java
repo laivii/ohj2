@@ -68,13 +68,6 @@ public class AllergiainfoGUIController implements Initializable {
                 cbNilviaiset, cbLupiini, cbSulfiitit
         );        
     }
-    
-    
-	@FXML
-	//TODO miten annetaan muokattavan tuotteen tiedot?
-	private void avaaTuotteenMuokkaus() {
-	    ModalController.showModal( AllergiainfoGUIController.class.getResource("EditProductGUIView.fxml"), "Muokkaa", null, "" );
-	}
 	
 	
 	@FXML
@@ -88,7 +81,7 @@ public class AllergiainfoGUIController implements Initializable {
 	    suodataAllergeeneilla();
 	}
 	
-    //EI vielä testattu --> odottaa tuotteen lisäys ominaisuutta, jotta saadaan eri tuotteita testaamiseen	
+	
 	@FXML
 	private void haku() {
 	    haeTuotteenNimella();
@@ -170,7 +163,7 @@ public class AllergiainfoGUIController implements Initializable {
 	    }
 	}
 	
-    //TODO Odottaa vielä testaamista	
+	
 	private void haeTuotteenNimella() {
 	    String hakuehto = searchField.getText();
 	    
@@ -267,7 +260,7 @@ public class AllergiainfoGUIController implements Initializable {
         Button muokkaa = new Button( "M" );
         Button poista  = new Button( "P" );
         
-        muokkaa.setOnAction( e -> avaaTuotteenMuokkaus() ); //TODO miten siirretään tuotteen numero
+        muokkaa.setOnAction( e -> muokkaaTuotetta( t ) );
         poista.setOnAction( e -> poistaTuoteIdlla( tuote.haeId() ));
         
         napit.getChildren().addAll( muokkaa, poista );
@@ -275,6 +268,18 @@ public class AllergiainfoGUIController implements Initializable {
         tuoteBox.getChildren().addAll( tuotteenTiedot, napit );
         
         return tuoteBox;
+    }
+    
+    /**
+     * Avataan tuotteen muokkaus näkymä
+     * @param t muokattava tuote
+     */
+    private void muokkaaTuotetta( Tuote t ) {
+        
+    //  Asetetaan muokattava tuote "säilöön"
+        this.allergiainfo.asetaMuokattava( t );
+        
+        ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("EditProductGUIView.fxml"), "Muokkaa", null, this.allergiainfo );
     }
 	
 	
