@@ -61,8 +61,7 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
     
     @Override
     public Allergiainfo getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return palautus;
     }
 
 
@@ -100,6 +99,7 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
 //---------------------------------------------------------------------------------------------------------------------------------------------
 // Tästä eteenpäin ei käyttöliittymään suoraan liittyvää koodia
     
+    private Allergiainfo palautus = null;
     
     private Allergiainfo    allergiainfo;
     private List<CheckBox>  allergeeniCheckBoxes;
@@ -166,6 +166,7 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
         }
         
     //  Suljetaan näkymä
+        palautus = this.allergiainfo;
         ModalController.closeStage( AddNewBtn );
     }
 }

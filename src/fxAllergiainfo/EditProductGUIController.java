@@ -62,8 +62,7 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
     
     @Override
     public Allergiainfo getResult() {
-        // TODO Auto-generated method stub
-        return null;
+        return palautus;
     }
 
     
@@ -95,13 +94,16 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
     }
     
 //---------------------------------------------------------------------------------------------------------------------------------------------
-// 
+// Tästä eteenpäin ei käyttöliittymään suoraan liittyvää koodia 
+    
+    private Allergiainfo palautus = null;
     
     private Allergiainfo allergiainfo;
     private Tuote tuote = null;
     private List<CheckBox>  allergeeniCheckBoxes;
     private List<Ravintola> ravintolat = new ArrayList<>();
     private List<TuoteAllergeeni> allergeenit = new ArrayList<>();
+    
     
     /**
      * Peruutetaan muokkaus
@@ -158,7 +160,9 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
         }
         
         ModalController.closeStage( saveBtn );
+        palautus = this.allergiainfo;
     }
+    
     
     /**
      * Asetetaan muokattavan tuotteen tiedot modaaliin
