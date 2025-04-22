@@ -61,12 +61,18 @@ public class AllergiainfoGUIController implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        //Asetetaan allergeeni "suodattajat" listaan kun sovellus avataan
+    //  Asetetaan allergeeni "suodattajat" listaan kun sovellus avataan
         allergiaCheckBoxes = Arrays.asList(
                 cbGluteeni, cbMaito, cbLaktoosi, cbMuna, cbSoija, cbSeesami, cbSinappi,
                 cbSelleri, cbKala, cbAyriaiset, cbPahkinat, cbMaapahkina,
                 cbNilviaiset, cbLupiini, cbSulfiitit
-        );        
+        );   
+        
+    //  
+       searchField.textProperty().addListener(( observable, oldValue, newValue ) -> {
+           suodataTuotteet();
+       }); 
+        
     }
 	
 	
@@ -80,13 +86,7 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	@FXML
 	private void suodata() {
-	    suodataAllergeeneilla();
-	}
-	
-	
-	@FXML
-	private void haku() {
-	    haeTuotteenNimella();
+	    suodataTuotteet();
 	}
     
     
@@ -137,45 +137,33 @@ public class AllergiainfoGUIController implements Initializable {
 	 * Tyhjentää tuotelistan (UI) ja laittaa tilalle suodatetut tulokset
 	 * Ei vaikuta varsinaiseen listaan/taulukkoon vain käyttöliittymän listaukseen
 	 */
-	private void suodataAllergeeneilla() {
+	private void suodataTuotteet() {
+	    String hakuehto = searchField.getText().toLowerCase();
 	    List<Integer> allergiat = allergiaCheckBoxes.stream()
-	                              .filter( CheckBox::isSelected)
-	                              .map( cb -> Integer.parseInt( cb.getUserData().toString()))
-	                              .toList();
-	    
+	                               .filter(CheckBox::isSelected)
+	                               .map(cb -> Integer.parseInt(cb.getUserData().toString()))
+	                               .toList();
+
 	    tuotteetVBox.getChildren().clear();
-	    
-	    for( int i = 0; i < this.allergiainfo.haeTuotteita(); i++ ) {
-	        Tuote tuote = this.allergiainfo.annaTuote( i );
-	        
-	        List<TuoteAllergeeni> tuotteenAllergeenit = this.allergiainfo.haeTuotteenAllergeenit( tuote.haeId());
-	        
-	        boolean sisaltaa = false;
-	        
-	        for( TuoteAllergeeni ta: tuotteenAllergeenit ) {
-	            if( allergiat.contains( ta.haeAllergeeniID())) {
-	                sisaltaa = true;
-	                break;
-	            }
+
+	    for (int i = 0; i < this.allergiainfo.haeTuotteita(); i++) {
+	        Tuote tuote = this.allergiainfo.annaTuote(i);
+
+	    //  Suodata nimen perusteella
+	        if (!hakuehto.isBlank() && !tuote.haeNimi().toLowerCase().contains(hakuehto)) {
+	            continue;
 	        }
-	        
-	        if( !sisaltaa ) {
-	            tuotteetVBox.getChildren().add( luoTuoteKomponentti( tuote ));
+
+	    //  Suodata allergeenien perusteella
+	        List<TuoteAllergeeni> tuotteenAllergeenit = this.allergiainfo.haeTuotteenAllergeenit(tuote.haeId());
+	        boolean sisaltaaAllergeenin = tuotteenAllergeenit.stream()
+	                                      .anyMatch(ta -> allergiat.contains(ta.haeAllergeeniID()));
+
+	        if (sisaltaaAllergeenin) {
+	            continue;
 	        }
-	    }
-	}
-	
-	
-	private void haeTuotteenNimella() {
-	    String hakuehto = searchField.getText();
-	    
-	    tuotteetVBox.getChildren().clear();
-	        
-	    for( int i = 0; i < this.allergiainfo.haeTuotteita(); i++ ) {
-	        Tuote tuote = this.allergiainfo.annaTuote( i );
-	        String nimi = tuote.haeNimi();
-	        
-	        if( nimi.toLowerCase().contains( hakuehto.toLowerCase() )) tuotteetVBox.getChildren().add( luoTuoteKomponentti( tuote ));
+
+	        tuotteetVBox.getChildren().add(luoTuoteKomponentti(tuote));
 	    }
 	}
 	

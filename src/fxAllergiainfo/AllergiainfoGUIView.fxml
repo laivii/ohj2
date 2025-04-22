@@ -96,12 +96,12 @@
                      </VBox.margin>
                   </Text>
                   <HBox>
-	                  <TextField fx:id="searchField" onAction="#haku" promptText="Hae tuotteita...">
+	                  <TextField fx:id="searchField" onAction="#suodata" promptText="Hae tuotteita...">
 	                     <font>
 	                        <Font size="16.0" />
 	                     </font>
 	                  </TextField>
-	                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#haku" text="Hae" minWidth="50">
+	                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#suodata" text="Hae" minWidth="50">
 		                  <font>
 	                        <Font size="16.0" />
 	                      </font>
