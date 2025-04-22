@@ -12,7 +12,7 @@ import allergiainfo.Allergiainfo;
 /**
  * @author Viivi
  * @version 10.3.2025
- *
+ * @version 18.4.2025
  */
 public class AllergiainfoMain extends Application {
 	@Override
