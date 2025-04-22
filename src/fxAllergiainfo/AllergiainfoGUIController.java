@@ -33,11 +33,13 @@ import javafx.geometry.Insets;
 /**
  * @author Viivi
  * @version 11.3.2025
+ * @version 18.4.2025
+ * @version 21.4.2025
  */
 public class AllergiainfoGUIController implements Initializable {
     
     @FXML private TextField  searchField;
-    //@FXML private Button     searchButton;
+    @FXML private Button     searchButton;
     @FXML private ScrollPane panelTuotteet;
     @FXML private VBox       tuotteetVBox;
     @FXML private CheckBox   cbGluteeni;
@@ -55,14 +57,13 @@ public class AllergiainfoGUIController implements Initializable {
     @FXML private CheckBox   cbNilviaiset;
     @FXML private CheckBox   cbLupiini;
     @FXML private CheckBox   cbSulfiitit;
-    //@FXML private ComboBox<?> searchTermCB; //TODO add arguments to CB
     
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Asetetaan allergeeni "suodattajat" listaan kun sovellus avataan
         allergiaCheckBoxes = Arrays.asList(
-                cbMaito, cbLaktoosi, cbMuna, cbSoija, cbSeesami, cbSinappi,
+                cbGluteeni, cbMaito, cbLaktoosi, cbMuna, cbSoija, cbSeesami, cbSinappi,
                 cbSelleri, cbKala, cbAyriaiset, cbPahkinat, cbMaapahkina,
                 cbNilviaiset, cbLupiini, cbSulfiitit
         );        
@@ -77,14 +78,8 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	
 	@FXML
-	private void avaaLisaaTuote() {
-	    ModalController.showModal( AllergiainfoGUIController.class.getResource("ProductGUIView.fxml"), "Lisää uusi tuote", null, "" );
-	}
-	
-	
-	@FXML
-	private void lisaaUusiTuote() {
-	    lisaaTuote();
+	private void lisaaTuote() {
+	    ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("ProductGUIView.fxml"),"Lisää uusi tuote", null, this.allergiainfo);
 	}
 	
 	
@@ -93,11 +88,11 @@ public class AllergiainfoGUIController implements Initializable {
 	    suodataAllergeeneilla();
 	}
 	
-// EI vielä testattu --> odottaa tuotteen lisäys ominaisuutta, jotta saadaan eri tuotteita testaamiseen	
-//	@FXML
-//	private void haku() {
-//	    haeTuotteenNimella();
-//	}
+    //EI vielä testattu --> odottaa tuotteen lisäys ominaisuutta, jotta saadaan eri tuotteita testaamiseen	
+	@FXML
+	private void haku() {
+	    haeTuotteenNimella();
+	}
     
     
 //============================================================================================================
@@ -175,19 +170,19 @@ public class AllergiainfoGUIController implements Initializable {
 	    }
 	}
 	
-//TODO Odottaa vielä testaamista	
-//	private void haeTuotteenNimella() {
-//	    String hakuehto = searchField.getText();
-//	    
-//	    tuotteetVBox.getChildren().clear();
-//	        
-//	    for( int i = 0; i < this.allergiainfo.haeTuotteita(); i++ ) {
-//	        Tuote tuote = this.allergiainfo.annaTuote( i );
-//	        String nimi = tuote.haeNimi();
-//	        
-//	        if( nimi.toLowerCase().contains( hakuehto.toLowerCase() )) tuotteetVBox.getChildren().add( luoTuoteKomponentti( tuote ));
-//	    }
-//	}
+    //TODO Odottaa vielä testaamista	
+	private void haeTuotteenNimella() {
+	    String hakuehto = searchField.getText();
+	    
+	    tuotteetVBox.getChildren().clear();
+	        
+	    for( int i = 0; i < this.allergiainfo.haeTuotteita(); i++ ) {
+	        Tuote tuote = this.allergiainfo.annaTuote( i );
+	        String nimi = tuote.haeNimi();
+	        
+	        if( nimi.toLowerCase().contains( hakuehto.toLowerCase() )) tuotteetVBox.getChildren().add( luoTuoteKomponentti( tuote ));
+	    }
+	}
 	
 	
 	/**
@@ -221,7 +216,7 @@ public class AllergiainfoGUIController implements Initializable {
     private HBox luoTuoteKomponentti( Tuote t ) {
         
         Tuote tuote = t;
-        Ravintola ravintola = this.allergiainfo.annaRavintola( tuote.haeRavintolaId() );
+        Ravintola ravintola = this.allergiainfo.annaRavintola( tuote.haeRavintolaId() - 1 );
         List<TuoteAllergeeni> tuoteAllergeenit = this.allergiainfo.haeTuotteenAllergeenit( tuote.haeId() );
         
         HBox tuoteBox = new HBox();
@@ -282,32 +277,6 @@ public class AllergiainfoGUIController implements Initializable {
         return tuoteBox;
     }
 	
-	//TODO Siirrä oikeaan paikkaan(?)
-	/**
-	 * Luodaan uusi alustettu tuote
-	 */
-	private void lisaaTuote() {	    
-	    Tuote tuote = new Tuote();
-	    tuote.rekisteroi(); //TODO muuta kun muokataan toimivaksi --> rekisteröinti vasta myöhemmin
-	    tuote.taytaTuoteTiedoilla();
-	    
-	    try {
-            allergiainfo.lisaa(tuote);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
-            return;
-        }
-	    
-	    //TODO Lisää tuote VBoxiin
-	    //hae();
-	    
-	    try {
-            allergiainfo.tallennaTuotteet();
-        } catch (SailoException e) {
-           System.err.println( e.getMessage() );
-        }
-	}
-	
 	
 	/**
 	 * Poistetaan tuote ja haetaan tuotteet uudestaan
@@ -317,29 +286,6 @@ public class AllergiainfoGUIController implements Initializable {
 	    allergiainfo.poistaTiettyTuote( tuoteID );
 	    hae();
 	}
-	
-//TODO siirrä oikeaan paikkaan --> tuotteen muokkaus
-//	/**
-//	 * Lisätään valitulle tuotteelle allergeeni
-//	 */
-//    private void lisaaTuoteAllergeeni() {
-//        /*
-//         * allergeeneja 15 eri, joten demossa voidaan valita random 0-14
-//         * TODO katso ettei allergeeni ole jo yhdistetty tuotteeseen
-//         */
-//        int allergeeniID = (int)(Math.random()* 15);
-//        int tuoteID = tuoteKohdalla.haeId();
-//        
-//        allergiainfo.lisaa(tuoteID, allergeeniID);
-//        
-//        naytaTuote();
-//        
-//        try {
-//            allergiainfo.tallennaTuoteAllergeenit();
-//        } catch (SailoException e) {
-//            System.err.println( e.getMessage() );
-//        }
-//    }
     
     
     /**
