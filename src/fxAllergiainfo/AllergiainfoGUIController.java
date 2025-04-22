@@ -72,7 +72,9 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	@FXML
 	private void lisaaTuote() {
-	    ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("ProductGUIView.fxml"),"Lisää uusi tuote", null, this.allergiainfo);
+	    Allergiainfo palautus = ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("ProductGUIView.fxml"),"Lisää uusi tuote", null, this.allergiainfo);
+	    
+	    if( palautus != null ) hae();
 	}
 	
 	
@@ -279,7 +281,9 @@ public class AllergiainfoGUIController implements Initializable {
     //  Asetetaan muokattava tuote "säilöön"
         this.allergiainfo.asetaMuokattava( t );
         
-        ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("EditProductGUIView.fxml"), "Muokkaa", null, this.allergiainfo );
+        Allergiainfo palautus = ModalController.<Allergiainfo>showModal( AllergiainfoGUIController.class.getResource("EditProductGUIView.fxml"), "Muokkaa", null, this.allergiainfo );
+        
+        if( palautus != null ) hae();
     }
 	
 	
