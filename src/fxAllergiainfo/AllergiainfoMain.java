@@ -7,12 +7,14 @@ import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
 
 import allergiainfo.Allergiainfo;
+import allergiainfo.SailoException;
 
 
 /**
  * @author Viivi
  * @version 10.3.2025
  * @version 18.4.2025
+ * @version 23.4.2025
  */
 public class AllergiainfoMain extends Application {
 	@Override
@@ -31,19 +33,20 @@ public class AllergiainfoMain extends Application {
 			Allergiainfo allergiainfo = new Allergiainfo();
 			allergiainfoCtrl.setAllergiainfo(allergiainfo);
 			
-		     /*
-	         * Alustetaan valmiiksi ravintoloiden ja allergeenien tiedot
-	         * Näissä valmiit "vaihtoehdot" näitä ei voi lisätä uusina
-	         */
+		//  Alustetaan ravintolat (toistaiseksi vain tietyt vaihtoehdot)
 	        allergiainfo.alustaRavintolat();
 			
 			primaryStage.show();
 			
             allergiainfoCtrl.lueTiedostosta();
             
-            //Tallennetaan ennen sulkemista
+        //  Tallennetaan ennen sulkemista
             primaryStage.setOnCloseRequest( event -> {
-                allergiainfoCtrl.tallenna();
+                try {
+                    allergiainfo.tallenna();
+                } catch (SailoException e) {
+                    System.err.println( e.getMessage() );
+                }
             });
 
 		} catch(Exception e) {
