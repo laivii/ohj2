@@ -20,11 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * @author Viivi
- * @version 10.2.2025
- * @version 22.4.2025
+ * @version 23.4.2025
  */
 
 public class EditProductGUIController implements ModalControllerInterface<Allergiainfo>, Initializable {
@@ -68,7 +68,20 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
     
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
+        
+        Stage stage = (Stage) saveBtn.getScene().getWindow();
+        stage.setOnCloseRequest(event -> {
+            if ( onkoTallentamatta() ) {
+                
+                Boolean vastaus = ModalController.<Boolean>showModal(ProductGUIController.class.getResource("WarningUnsavedGUIView.fxml"), "Varoitus", null, true);
+                
+                if ( vastaus ) {
+                    tallenna();
+                }
+                
+                ModalController.closeStage( saveBtn );
+            }
+        });
         
     }
 
@@ -100,6 +113,7 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
     
     private Allergiainfo allergiainfo;
     private Tuote tuote = null;
+    private Ravintola ravintola;
     private List<CheckBox>  allergeeniCheckBoxes;
     private List<Ravintola> ravintolat = new ArrayList<>();
     private List<TuoteAllergeeni> allergeenit = new ArrayList<>();
@@ -109,6 +123,16 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
      * Peruutetaan muokkaus
      */
     private void peruuta() {
+        
+        if( onkoTallentamatta() ) {
+            Boolean jatko = ModalController.<Boolean>showModal( ProductGUIController.class.getResource("WarningUnsavedGUIView.fxml"), "Varoitus", null, true );
+            System.out.println("palautti: " + jatko );
+            
+            if( jatko ) {
+                tallenna();
+            };
+        }
+        
         ModalController.closeStage(cancelBtn);
     }
     
@@ -117,6 +141,9 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
      * Tallennetaan muutokset
      */
     private void tallenna() {
+        
+        if( !onkoTallentamatta() ) ModalController.closeStage( saveBtn );
+        
         String nimiMuokattu = textProductName.getText();
         Ravintola ravintolaMuokattu = restaurantCB.getValue();
         
@@ -149,10 +176,8 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
             }
         }
         
-    //  "Tyhjennetään" muokattava
         this.allergiainfo.asetaMuokattava( null );
         
-    //  Tallennetaan muutokset tiedostoihin
         try {
             this.allergiainfo.tallenna();
         } catch (SailoException e) {
@@ -161,6 +186,31 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
         
         ModalController.closeStage( saveBtn );
         palautus = this.allergiainfo;
+    }
+    
+    
+    /**
+     * Tarkistetaan onko muutoksia
+     * @return totuus arvo onko muutoksia ( true | false )
+     */
+    private boolean onkoTallentamatta() {
+        
+        if( !textProductName.getText().equalsIgnoreCase( tuote.haeNimi())) return true;
+        
+        if( restaurantCB.getValue() == null || !restaurantCB.getValue().equals( this.ravintola )) return true;
+        
+        List<Integer> allergeenitNyt = allergeeniCheckBoxes.stream()
+                                       .filter(CheckBox::isSelected)
+                                       .map(cb -> Integer.parseInt(cb.getUserData().toString()))
+                                       .toList();
+        
+        List<Integer> allergeenitAlussa = allergeenit.stream()
+                                          .map( TuoteAllergeeni::haeAllergeeniID )
+                                          .toList();
+        
+        if( !allergeenitNyt.containsAll( allergeenitAlussa ) || !allergeenitAlussa.containsAll( allergeenitNyt )) return true;
+        
+        return false;
     }
     
     
@@ -183,15 +233,14 @@ public class EditProductGUIController implements ModalControllerInterface<Allerg
         
         
     //  Haetaan ja asetetaan nykyinen ravintola ComboBoxin arvoksi
-        Ravintola ravintola = null;
-        
+       
         try {
-            ravintola = this.allergiainfo.haeRavintolaIdlla( tuote.haeRavintolaId());
+            this.ravintola = this.allergiainfo.haeRavintolaIdlla( this.tuote.haeRavintolaId() );
         } catch (SailoException e) {
             System.err.println( e.getMessage());
         }
         
-        restaurantCB.setValue( ravintola );
+        restaurantCB.setValue( this.ravintola );
        
         
     //  Haetaan ja asetetaan allergeenit (CheckBox arvot)

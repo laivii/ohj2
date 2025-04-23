@@ -1,6 +1,5 @@
 package fxAllergiainfo;
 
-import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
@@ -8,42 +7,49 @@ import javafx.scene.control.Button;
 
 /**
  * @author Viivi
- * @version 11.2.2025
- *
+ * @version 23.4.2025
  */
-public class WarningUnsavedGUIController implements ModalControllerInterface<String> {
+public class WarningUnsavedGUIController implements ModalControllerInterface<Boolean> {
+    
     @FXML private Button exitBtn;
+    @FXML private Button saveBtn;
 
     @Override
-    public String getResult() {
-        // TODO Auto-generated method stub
-        return null;
+    public Boolean getResult() {
+        return palautus;
     }
 
+    
     @Override
     public void handleShown() {
-        // TODO Auto-generated method stub
-        
+        //
     }
 
+
     @Override
-    public void setDefault(String oletus) {
-        // TODO Auto-generated method stub
-        
+    public void setDefault(Boolean oletus) {
+        this.palautus = oletus;
     }
+    
     
     @FXML
     private void saveChanges() {
-        Dialogs.showMessageDialog("Ei vielä osata tallentaa");
+        this.palautus = true;
+        exit();
     }
+    
     
     @FXML
     private void exitWithoutSaving() {
+        this.palautus = false;
         exit();
     }
+
+//-------------------------------------------------------------------------------------------------------------------------------------------
+    
+    private Boolean palautus;
     
     private void exit() {
         ModalController.closeStage(exitBtn);
     }
-	
 }
