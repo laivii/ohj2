@@ -23,14 +23,15 @@ import javafx.scene.control.TextField;
 
 /**
  * @author Viivi
- * @version 18.4.2025
- * @version 21.4.2025
+ * @version 23.4.2025
  */
 public class ProductGUIController implements ModalControllerInterface<Allergiainfo>, Initializable{
+    
     @FXML private Button cancelBtn;
     @FXML private Button AddNewBtn;
     @FXML private TextField textProductName;
     @FXML private ComboBox<Ravintola> restaurantCB;
+    
     @FXML private CheckBox gluteeni;
     @FXML private CheckBox maitotuotteet;
     @FXML private CheckBox laktoosi;
@@ -50,7 +51,7 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        //Asetetaan allergeeni checkboxit listaan kun sovellus avataan
+    //  Asetetaan allergeeni checkboxit listaan kun sovellus avataan
         allergeeniCheckBoxes = Arrays.asList(
                 gluteeni, maitotuotteet, laktoosi, kananmuna, soija,
                 seesami, sinappi, selleri, kala, ayriaiset, pahkinat,
@@ -119,17 +120,48 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
      * Lisätään tuote tuotteistoon
      * Lisätään tuotteelle valitut allergeenit
      */
-    private void lisaaUusi() {        
+    private void lisaaUusi() { 
+    //  Alustetaan laatikoiden tyylit
+        textProductName.setStyle("");
+        restaurantCB.setStyle("");
+        
     //  Haetaan luotavan tuotteen tiedot
-        String nimi = textProductName.getText();
-        
+        String nimi = textProductName.getText().trim();
         Ravintola ravintola = restaurantCB.getValue();
-        int ravintolaNro = ravintola.haeId();
         
+        
+    //  Tarkistetaan, että tuotteella on nimi ja sille on valittu ravintola
+        boolean hasError = false;
+        String virheViesti = "";
+        
+        if( nimi.isEmpty() ) {
+            textProductName.setStyle("-fx-border-color: red;");
+            virheViesti += "Tuotteelta puuttuu nimi!\n";
+            hasError = true;
+        }
+        
+        if( restaurantCB.getValue() == null ) {
+            restaurantCB.setStyle("-fx-border-color: red;");
+            virheViesti += "Valitse ravintola!";
+            hasError = true;
+        }
+
+        if( hasError ) {
+            Dialogs.showMessageDialog("Virheitä lomakkeella:\n" + virheViesti, dlg -> {
+                dlg.getDialogPane().setPrefWidth(250);
+                dlg.getDialogPane().setPrefHeight(150);
+            });
+            
+            return;
+        }
+        
+    //  Jos virheitä ei löydy jatketaan eteenpäin
+        int ravintolaNro = ravintola.haeId();
         List<Integer> allergeenit = allergeeniCheckBoxes.stream()
                                     .filter( CheckBox::isSelected )
                                     .map( cb -> Integer.parseInt( cb.getUserData().toString()))
                                     .toList();
+        
         
     //  Luodaan tuote objekti
         Tuote tuote = new Tuote();
@@ -157,7 +189,6 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
             }
         }
         
-    //  Tallennetaan tuote tiedostoon
         try {
             allergiainfo.tallennaTuotteet();
             allergiainfo.tallennaTuoteAllergeenit();
@@ -165,7 +196,6 @@ public class ProductGUIController implements ModalControllerInterface<Allergiain
            System.err.println( e.getMessage() );
         }
         
-    //  Suljetaan näkymä
         palautus = this.allergiainfo;
         ModalController.closeStage( AddNewBtn );
     }
