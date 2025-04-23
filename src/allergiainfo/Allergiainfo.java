@@ -43,13 +43,7 @@ public class Allergiainfo {
      * @param allergeeniID allergeenin id
      */
     public void lisaa(int tuoteID, int allergeeniID ) {
-        /*
-         * TODO muokkaa järkeväksi
-         * TuoteAllergeeni ta = new TuoteAllergeeni( tuoteID, allergeeniID );
-         * this.tuoteAllergeeni.lisaa( ta );
-         */
-        TuoteAllergeeni ta = new TuoteAllergeeni();
-        ta.taytaTuoteAllergeeniTiedoilla( tuoteID, allergeeniID );
+        TuoteAllergeeni ta = new TuoteAllergeeni( tuoteID, allergeeniID );
         this.tuoteAllergeenit.lisaa( ta );
     }
     
@@ -60,14 +54,6 @@ public class Allergiainfo {
      */
     public void poistaTiettyTuote(int id) {
         this.tuotteet.poistaTietty(id);
-    }
-    
-    
-    /**
-     * Poistaa taulukon viimeisen tuotteen
-     */
-    public void poistaViimeinenTuote() {
-        this.tuotteet.poistaViimeinen();
     }
     
     
@@ -225,8 +211,7 @@ public class Allergiainfo {
         tuotteet         = new Tuotteet();
         tuoteAllergeenit = new TuoteAllergeenit();
         allergeenit      = new Allergeenit();
-        //Ravintolat ei ns. käytössä lisätään myöhemmin
-        // ravintolat = new Ravintolat();
+        // ravintolat = new Ravintolat(); // Ravintolat ei vielä "käytössä"
         
         tuotteet.lueTiedostosta("tuotteet");
         tuoteAllergeenit.lueTiedostosta("tuoteAllergeenit");
@@ -254,14 +239,14 @@ public class Allergiainfo {
             virhe = e.getMessage();
         }
         
-        //Tämä vähän turha, koska tällähetkellä ei voida lisätä uusia allergeeneja
+    //  Tämä vähän turha, koska tällähetkellä ei voida lisätä uusia allergeeneja
         try {
             allergeenit.tallenna("allergeenit");
         } catch (SailoException e ) {
             virhe = e.getMessage();
         }
         
-        //Ravintolat ei vielä ns. käytössä voidaan lisätä myöhemmin
+    //  Ravintolat ei vielä ns. käytössä voidaan lisätä myöhemmin
 //        try {
 //            ravintolat.tallenna("ravintolat");
 //        } catch (SailoException e ) {
