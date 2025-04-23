@@ -133,7 +133,7 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	
 	/**
-	 * Suodattaa tuotteet allergeenien (accordion checkbox) perusteella
+	 * Suodattaa tuotteet nimen ja allergeenien (accordion checkbox) perusteella
 	 * Tyhjentää tuotelistan (UI) ja laittaa tilalle suodatetut tulokset
 	 * Ei vaikuta varsinaiseen listaan/taulukkoon vain käyttöliittymän listaukseen
 	 */
@@ -190,7 +190,6 @@ public class AllergiainfoGUIController implements Initializable {
 	}
 	
 	
-	//TODO pitäisikö siirtää allergiainfo.java tiedostoon?
 	/**
 	 * Luodaan tuote komponentti
 	 * @param t tuote jolle tahdotaan luoda komponentti (Eli siis ruudussa näkyvä "kortti")
@@ -251,7 +250,7 @@ public class AllergiainfoGUIController implements Initializable {
         Button poista  = new Button( "P" );
         
         muokkaa.setOnAction( e -> muokkaaTuotetta( t ) );
-        poista.setOnAction( e -> poistaTuoteIdlla( tuote.haeId() ));
+        poista.setOnAction( e -> poistaTuote( tuote.haeId() ));
         
         napit.getChildren().addAll( muokkaa, poista );
         
@@ -259,6 +258,7 @@ public class AllergiainfoGUIController implements Initializable {
         
         return tuoteBox;
     }
+    
     
     /**
      * Avataan tuotteen muokkaus näkymä
@@ -276,11 +276,31 @@ public class AllergiainfoGUIController implements Initializable {
 	
 	
 	/**
-	 * Poistetaan tuote ja haetaan tuotteet uudestaan
+	 * Poistetaan tuote ja sen allergeenit
+	 * Haetaan tuotteet uudestaan
 	 * @param tuoteID poistettavan tuotteen id
 	 */
-	private void poistaTuoteIdlla( int tuoteID ) {
-	    allergiainfo.poistaTiettyTuote( tuoteID );
+	private void poistaTuote( int tuoteID ) {
+	    Tuote tuote = null;
+	    try {
+            tuote = this.allergiainfo.haeTuoteIdlla( tuoteID );
+        } catch (SailoException e) {
+            System.err.println( e.getMessage() );
+        }
+	    
+	    if( tuote == null ) return;
+	    
+	    Tuote palautus = ModalController.<Tuote>showModal( AllergiainfoGUIController.class.getResource("WarningDeleteGUIView.fxml"), "Varoitus", null, tuote);
+	    
+	    if( palautus == null ) return;
+	    
+	    this.allergiainfo.poistaTiettyTuote( tuoteID );
+	    List<TuoteAllergeeni> allergeenit = this.allergiainfo.haeTuotteenAllergeenit( tuoteID );
+	    
+	    for( TuoteAllergeeni ta: allergeenit ) {
+	        this.allergiainfo.poistaTuoteAllergeeni( ta );
+	    }
+	    
 	    hae();
 	}
     

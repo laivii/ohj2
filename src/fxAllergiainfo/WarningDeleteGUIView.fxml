@@ -14,7 +14,7 @@
    <center>
       <Pane prefHeight="125.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="23.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Olet poistamassa tuotteen “Quesadilla”. Haluatko varmasti poistaa valitun tuotteen?" wrappingWidth="354.705078125">
+            <Text fx:id="textVaroitus" layoutX="23.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="354.705078125">
                <font>
                   <Font size="16.0" />
                </font>
@@ -31,7 +31,7 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="deleteBtn" cancelButton="true" mnemonicParsing="false" onAction="#deleteProduct" text="Poista tuote">
+                  <Button fx:id="deleteBtn" cancelButton="true" mnemonicParsing="false" onAction="#delete" text="Poista tuote">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -39,7 +39,7 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cancelBtn" defaultButton="true" mnemonicParsing="false" onAction="#cancelDelete" text="Peruuta">
+                  <Button fx:id="cancelBtn" defaultButton="true" mnemonicParsing="false" onAction="#cancel" text="Peruuta">
                      <font>
                         <Font size="16.0" />
                      </font>

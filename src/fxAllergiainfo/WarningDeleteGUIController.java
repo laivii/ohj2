@@ -1,48 +1,61 @@
 package fxAllergiainfo;
 
-import fi.jyu.mit.fxgui.Dialogs;
+import allergiainfo.Tuote;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 /**
  * @author Viivi
  * @version 10.2.2025
- *
+ * @version 23.4.2025
  */
-public class WarningDeleteGUIController implements ModalControllerInterface<String> {
+public class WarningDeleteGUIController implements ModalControllerInterface<Tuote> {
+    
     @FXML private Button cancelBtn;
-
+    @FXML private Button deleteBtn;
+    @FXML private Text   textVaroitus;
+   
+    
     @Override
-    public String getResult() {
-        // TODO Auto-generated method stub
-        return null;
+    public Tuote getResult() {
+        return palautus;
     }
 
+    
     @Override
     public void handleShown() {
         // TODO Auto-generated method stub
         
     }
 
+    
     @Override
-    public void setDefault(String oletus) {
-        // TODO Auto-generated method stub
+    public void setDefault(Tuote oletus) {
+        this.tuote = oletus;
+        this.tuotteenNimi = oletus.haeNimi();
         
+        String varoitus = "Olet poistamassa tuotteen: " + this.tuotteenNimi + "\nHaluatko varmasti poistaa valitun tuotteen?";
+        textVaroitus.setText( varoitus );
     }
     
+    
     @FXML
-    private void cancelDelete() {
-        ModalController.closeStage(cancelBtn);
-    }
-	
-    @FXML
-    private void deleteProduct() {
-        delete();
+    private void cancel() {
+        ModalController.closeStage( cancelBtn );
     }
     
+    
+    @FXML
     private void delete() {
-        Dialogs.showMessageDialog("Ei osata vielä poistaa tuotetta");
+        this.palautus = tuote;
+        ModalController.closeStage( deleteBtn );
     }
+    
+    private Tuote palautus = null;
+    private Tuote tuote;
+    private String tuotteenNimi;
+
 }
