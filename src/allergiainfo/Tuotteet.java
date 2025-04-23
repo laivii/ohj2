@@ -14,6 +14,7 @@ import java.util.*;
  * 
  * @author Viivi
  * @version 31.3.2025
+ * @version 23.4.2025
  */
 public class Tuotteet {
     
@@ -75,44 +76,6 @@ public class Tuotteet {
     
     
     /**
-     * Poistetaan taulukon viimeinen alkio
-     * @example
-     * <pre name="test">
-     * #THROWS SailoException
-     *   Tuotteet tuotteet = new Tuotteet();
-     *   Tuote t1 = new Tuote();
-     *   Tuote t2 = new Tuote();
-     *   Tuote t3 = new Tuote();
-     *   
-     *   t1.rekisteroi(); t1.haeId() === 1;
-     *   t2.rekisteroi(); t2.haeId() === 2;
-     *   t3.rekisteroi(); t3.haeId() === 3;
-     *   
-     *   tuotteet.lisaa(t1); tuotteet.haeLkm() === 1;
-     *   tuotteet.lisaa(t2); tuotteet.haeLkm() === 2;
-     *   tuotteet.lisaa(t3); tuotteet.haeLkm() === 3;
-     *   
-     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 2;
-     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 1;
-     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 0;
-     *   tuotteet.poistaViimeinen(); tuotteet.haeLkm() === 0;
-     * </pre>
-     */
-    public void poistaViimeinen() {
-        if( this.lkm == 0 ) return;
-        
-        Tuote[] uusiLista = new Tuote[MAX_TUOTTEITA];
-        
-        for( int i = 0; i < this.alkiot.length - 1; i++ ) {
-                uusiLista[i] = this.alkiot[i];
-        }
-        
-        this.alkiot = uusiLista;
-        this.lkm -= 1;
-    }
-    
-    
-    /**
      * Poistaa valitun tuotteen id:n perusteella
      * @param id poistettavan tuotteen id
      * @example
@@ -123,18 +86,18 @@ public class Tuotteet {
      *   Tuote t2 = new Tuote();
      *   Tuote t3 = new Tuote();
      *   
-     *   t1.rekisteroi(); t1.haeId() === 7;
-     *   t2.rekisteroi(); t2.haeId() === 8;
-     *   t3.rekisteroi(); t3.haeId() === 9;
+     *   t1.rekisteroi(); t1.haeId() === 4;
+     *   t2.rekisteroi(); t2.haeId() === 5;
+     *   t3.rekisteroi(); t3.haeId() === 6;
      *   
      *   tuotteet.lisaa(t1); tuotteet.haeLkm() === 1;
      *   tuotteet.lisaa(t2); tuotteet.haeLkm() === 2;
      *   tuotteet.lisaa(t3); tuotteet.haeLkm() === 3;
      *   
-     *   tuotteet.poistaTietty(7);  tuotteet.haeLkm() === 2;
+     *   tuotteet.poistaTietty(4);  tuotteet.haeLkm() === 2;
      *   tuotteet.poistaTietty(99); tuotteet.haeLkm() === 2;
-     *   tuotteet.poistaTietty(8);  tuotteet.haeLkm() === 1;
-     *   tuotteet.poistaTietty(9);  tuotteet.haeLkm() === 0;
+     *   tuotteet.poistaTietty(5);  tuotteet.haeLkm() === 1;
+     *   tuotteet.poistaTietty(6);  tuotteet.haeLkm() === 0;
      * </pre>
      */
     public void poistaTietty(int id) {
@@ -184,17 +147,17 @@ public class Tuotteet {
      *  Tuote t2 = new Tuote();
      *  Tuote t3 = new Tuote();
      *  
-     *  t1.rekisteroi(); t1.haeId() === 4;
-     *  t2.rekisteroi(); t2.haeId() === 5;
-     *  t3.rekisteroi(); t3.haeId() === 6;
+     *  t1.rekisteroi(); t1.haeId() === 1;
+     *  t2.rekisteroi(); t2.haeId() === 2;
+     *  t3.rekisteroi(); t3.haeId() === 3;
      *  
      *  tuotteet.lisaa(t1);
      *  tuotteet.lisaa(t2);
      *  tuotteet.lisaa(t3);
      *  
-     *  tuotteet.haeTuoteIdlla(4) === t1;
-     *  tuotteet.haeTuoteIdlla(6) === t3;
-     *  tuotteet.haeTuoteIdlla(5) === t2;
+     *  tuotteet.haeTuoteIdlla(1) === t1;
+     *  tuotteet.haeTuoteIdlla(3) === t3;
+     *  tuotteet.haeTuoteIdlla(2) === t2;
      *  tuotteet.haeTuoteIdlla(55); #THROWS SailoException
      * </pre>
      */
