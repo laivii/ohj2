@@ -8,13 +8,12 @@ import fi.jyu.mit.ohj2.Mjonot;
 /**
  * @author Viivi
  * @version 26.2.2025
- *
+ * @version 23.4.2025
  */
 public class Allergeeni {
     
     private        int      id            = 0;
     private        String   nimi          = "";
-    private        int      yksiloivaNro  = 0; //TODO poista kun ei enää tarvita
     
     private static int      seuraavaNro   = 0;
     
@@ -33,7 +32,6 @@ public class Allergeeni {
      */
     public Allergeeni(String nimi) {
         this.nimi = nimi;
-        this.yksiloivaNro = (int)(Math.random() * 9999);
     }
     
     
@@ -62,7 +60,6 @@ public class Allergeeni {
      */
     public void taytaAllergeeniTiedoilla() {
         this.nimi = "Laktoosi";
-        this.yksiloivaNro = (int)(Math.random() * 9999);
     }
     
     
@@ -106,7 +103,7 @@ public class Allergeeni {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta(PrintStream out) {
-        out.println(String.format("%02d", this.id) + " " + this.nimi + " " + String.format("%03d", this.yksiloivaNro));
+        out.println(String.format("%02d", this.id) + " " + this.nimi );
     }
     
     

@@ -11,13 +11,12 @@ import fi.jyu.mit.ohj2.Mjonot;
  * - osaa tarkistaa kentän oikeellisuuden
  * @author Viivi
  * @version 10.3.2025
- *
+ * @version 23.4.2025
  */
 public class TuoteAllergeeni {
     
     private int tuoteId         = 0;
     private int allergeeniId    = 0;
-    private int yksiloivaNro    = 0;
 
     
     /**
@@ -47,7 +46,6 @@ public class TuoteAllergeeni {
     public void taytaTuoteAllergeeniTiedoilla(int tuote, int allergeeni) {
         this.tuoteId      = tuote;
         this.allergeeniId = allergeeni;
-        this.yksiloivaNro = (int)(Math.random() * 9999);
     }
     
     
@@ -56,7 +54,7 @@ public class TuoteAllergeeni {
      * @param out tietovirta johon tulostetaan
      */
     public void tulosta( PrintStream out ) {
-        out.println(String.format( "%03d", this.tuoteId ) + " " + String.format( "%03d", this.allergeeniId ) + " " + String.format( "%03d",this.yksiloivaNro ));
+        out.println(String.format( "%03d", this.tuoteId ) + " " + String.format( "%03d", this.allergeeniId ));
     }
     
     
@@ -88,16 +86,6 @@ public class TuoteAllergeeni {
     
     
     /**
-     * TODO Poista kun muuttunut "turhaksi"
-     * Apu metodi
-     * @return TA yksilöivä numero, jolla erottaa toisista
-     */
-    public int haeYksiloivaNro() {
-        return this.yksiloivaNro;
-    }
-    
-    
-    /**
      * Asetetaan tuotteen id
      * @param id tuotteen id
      */
@@ -115,19 +103,9 @@ public class TuoteAllergeeni {
     }
     
     
-    /**
-     * TODO Poista kun muuttuu turhaksi (demojen takia lisätty apumetodi)
-     * Asetetaan yksilöivä numero
-     * @param nro yksilöllinen numero
-     */
-    public void asetaYksiloivaNro( int nro ) {
-        this.yksiloivaNro = nro;
-    }
-    
-    
     @Override
     public String toString() {
-        return haeTuoteID() + "|" + haeAllergeeniID() + "|" + haeYksiloivaNro();
+        return haeTuoteID() + "|" + haeAllergeeniID();
     }
     
     
@@ -146,7 +124,6 @@ public class TuoteAllergeeni {
         StringBuilder sb = new StringBuilder( rivi );
         asetaTuoteID( Mjonot.erota( sb, '|', haeTuoteID()) );
         asetaAllergeeniID( Mjonot.erota( sb, '|', haeAllergeeniID() ));
-        asetaYksiloivaNro( Mjonot.erota( sb, '|', (int)( Math.random()*9999 )));
     }
     
     
