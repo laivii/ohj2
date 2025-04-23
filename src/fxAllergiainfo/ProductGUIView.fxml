@@ -18,7 +18,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxAllergiainfo.ProductGUIController">
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" minWidth="650.0" BorderPane.alignment="CENTER">
          <children>
             <VBox minWidth="300.0">
                <HBox.margin>
@@ -64,7 +64,7 @@
                         <Insets bottom="16.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" minWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" minWidth="250.0">
                      <children>
                         <Label text="Ravintola*">
                            <font>
