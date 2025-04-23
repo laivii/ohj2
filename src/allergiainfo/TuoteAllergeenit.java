@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * @author Viivi
  * @version 8.3.2025
+ * @version 22.4.2025
  *
  */
 public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
@@ -55,6 +56,12 @@ public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
      */
     public void poista( TuoteAllergeeni ta ) {
         alkiot.remove( ta );
+        
+        try {
+            tallenna("tuoteAllergeenit");
+        } catch (SailoException e) {
+            System.err.println( e.getMessage() );
+        }
     }
     
     
