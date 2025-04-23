@@ -88,6 +88,12 @@ public class AllergiainfoGUIController implements Initializable {
 	private void suodata() {
 	    suodataTuotteet();
 	}
+	
+	
+	@FXML
+	private void tyhjennaAllergiat() {
+	    tyhjenna();
+	}
     
     
 //============================================================================================================
@@ -210,28 +216,32 @@ public class AllergiainfoGUIController implements Initializable {
         
         
         String allergeenit = "Sisältää: \n";
+        
+        if( tuoteAllergeenit.size() > 0 ) {
+            for (int i = 0; i < tuoteAllergeenit.size(); i++) {
+                TuoteAllergeeni ta = tuoteAllergeenit.get(i);
+                int allergeeniId = ta.haeAllergeeniID();
 
-        for (int i = 0; i < tuoteAllergeenit.size(); i++) {
-            TuoteAllergeeni ta = tuoteAllergeenit.get(i);
-            int allergeeniId = ta.haeAllergeeniID();
+                Allergeeni allergeeni = null;
 
-            Allergeeni allergeeni = null;
+                try {
+                    allergeeni = this.allergiainfo.haeAllergeeniIdlla(allergeeniId);
+                } catch (SailoException e) {
+                    System.err.println(e.getMessage());
+                }
 
-            try {
-                allergeeni = this.allergiainfo.haeAllergeeniIdlla(allergeeniId);
-            } catch (SailoException e) {
-                System.err.println(e.getMessage());
-            }
+                if (allergeeni != null) {
+                    String nimi = allergeeni.haeNimi();
 
-            if (allergeeni != null) {
-                String nimi = allergeeni.haeNimi();
-
-                if (i < tuoteAllergeenit.size() - 1) {
-                    allergeenit += nimi + ", ";
-                } else {
-                    allergeenit += nimi;
+                    if (i < tuoteAllergeenit.size() - 1) {
+                        allergeenit += nimi + ", ";
+                    } else {
+                        allergeenit += nimi;
+                    }
                 }
             }
+        } else {
+            allergeenit = "Tuote ei sisällä allergeeneja!";
         }
         
         Label tuotteenAllergeenit = new Label( allergeenit );
@@ -302,6 +312,24 @@ public class AllergiainfoGUIController implements Initializable {
 	    }
 	    
 	    hae();
+	}
+	
+	
+	/**
+	 * Tyhjennetään allergia CheckBoxien valinnat
+	 * eli poistaa kaikki valinnat
+	 * 
+	 * Hakee tuotteet ja suodattaa uudelleen siltä varalta, että käyttäjällä on hakuehto (tekstikentässä)
+	 */
+	private void tyhjenna() {
+	    this.allergiaCheckBoxes.stream()
+	    .filter(CheckBox::isSelected)
+	    .forEach(cb -> cb.setSelected(false));
+	    
+	    hae();
+	    
+	//  Jos hakukentässä hakuehdot suodatetaan uudestaan, mutta ilman allergioita
+	    suodata();
 	}
     
     
