@@ -20,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-//import javafx.scene.control.ComboBox; //TODO add combobox and it's arguments
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,9 +31,9 @@ import javafx.geometry.Insets;
 
 /**
  * @author Viivi
- * @version 11.3.2025
- * @version 18.4.2025
- * @version 21.4.2025
+ * @version 24.4.2025
+ * 
+ * Hoitaa kaiken päänäytölle tulevan sekä tiedon pyytämisen
  */
 public class AllergiainfoGUIController implements Initializable {
     

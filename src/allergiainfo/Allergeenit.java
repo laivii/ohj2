@@ -5,8 +5,14 @@ import java.util.*;
 
 /**
  * @author Viivi
- * @version 10.3.2025
- *
+ * @version 24.4.2025
+ * 
+ * - Osaa lukea ja kirjoittaa allergeenit tiedostoon
+ * - Osaa lisätä allergeeneja (tämä toiminto ei kuitenkaan käytössä tällähetkellä)
+ * - Osaa hakea tietyn allergeenin allergeenistosta
+ * 
+ * TODO
+ * - Allergeenin poistaminen
  */
 public class Allergeenit {
     

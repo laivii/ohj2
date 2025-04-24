@@ -2,8 +2,14 @@ package allergiainfo;
 
 /**
  * @author Viivi
- * @version 8.3.2025
+ * @version 24.4.2025
+ * 
+ * Pitää yllä varsinaista ravintolarekisteriä
+ * Osaa teoriassa lisätä ravintolan, mutta toiminto ei vielä käytössä
  *
+ * TODO 
+ * - ravintoloiden taulukon kasvatus
+ * - tiedon lukeminen ja tallentaminen tiedostoon
  */
 public class Ravintolat {
     

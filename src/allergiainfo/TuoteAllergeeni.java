@@ -6,12 +6,14 @@ import java.io.PrintStream;
 import fi.jyu.mit.ohj2.Mjonot;
 
 /**
- * Vastuut:
- * - tietää tuoteAllergeenin kentät
- * - osaa tarkistaa kentän oikeellisuuden
  * @author Viivi
- * @version 10.3.2025
- * @version 23.4.2025
+ * @version 24.4.2025
+ * 
+ * - Tietää TuoteAllergeenin kentät
+ * - Osaa antaa tietyn kentät tiedot
+ * - Osaa asettaa tietyn kentän arvon
+ * - Osaa muuttaa TuoteAllergeenin tiedot merkkijonoksi
+ * - Osaa muuttaa merkkijonon TuoteAllergeeniksi
  */
 public class TuoteAllergeeni {
     

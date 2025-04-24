@@ -4,17 +4,14 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Vastuut:
- * Pitää yllä varsinaista tuoterekisteriä, eli osaa lisätä ja poistaa tuotteen
- * Lukee ja kirjoittaa tuotteiston tiedostoon(?)
- * Osaa etsiä ja lajitella
- * 
- * Avustajat:
- * Tuote-luokka
- * 
  * @author Viivi
- * @version 31.3.2025
  * @version 23.4.2025
+ * 
+ * - Pitää yllä varsinaista tuoterekisteriä
+ * - Lukee ja kirjoittaa tuotteiston tiedostoon
+ * - Osaa lisätä ja poistaa tuotteistosta
+ * - Osaa hakea tietyn tuotteen tuotteistosta
+ * - Osaa hakea tuotteiston tuotteiden määrän
  */
 public class Tuotteet {
     

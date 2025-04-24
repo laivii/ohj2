@@ -7,8 +7,13 @@ import fi.jyu.mit.ohj2.Mjonot;
 
 /**
  * @author Viivi
- * @version 26.2.2025
  * @version 23.4.2025
+ * 
+ * - Tietää allergeenin kentät
+ * - Osaa antaa tietyn kentän tiedot
+ * - Osaa asettaa tiedon tiettyyn kenttään
+ * - Osaa muuttaa tuotteen tiedot merkkijonoksi
+ * - Osaa muuttaa merkkijonon tuotteen tiedoiksi
  */
 public class Allergeeni {
     

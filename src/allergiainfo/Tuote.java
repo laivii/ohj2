@@ -6,16 +6,13 @@ import java.io.PrintStream;
 import fi.jyu.mit.ohj2.Mjonot;
 
 /**
- * Vastuut:
- * Tietää tuotteen kentät (id, nimi, ravintolaId)
- * Osaa tarkistaa tietyn kentän oikeellisuuden
- * Osaa muuttaa merkkijonon tuotteen tiedoiksi
- * Osaa antaa merkkijonona tietyn kentän
- * Osaa laittaa merkkijonon tietyksi kentäksi
- * 
  * @author Viivi
- * @version 31.3.2025
- *
+ * @version 24.4.2025
+ * 
+ * - Tietää tuotteen kentät
+ * - Osaa muuttaa merkkijonon tuotteen tiedoiksi
+ * - Osaa antaa tietyn kentän tiedot
+ * - Osaa muuttaa tuotteen tiedot merkkijonoksi
  */
 public class Tuote {
     

@@ -5,8 +5,14 @@ import java.io.PrintStream;
 
 /**
  * @author Viivi
- * @version 8.3.2025
+ * @version 24.4.2025
  *
+ * - Tietää ravintolan kentät
+ * - Osaa antaa tietyn kentän tiedot 
+ * 
+ * TODO
+ * - Tiedon muuttaminen merkkijonosta ravintolan tiedoiksi (parse)
+ * - Tiedon asettaminen kenttään
  */
 public class Ravintola {
     

@@ -4,8 +4,12 @@ import java.util.List;
 
 /**
  * @author Viivi
- * @version 10.3.2025
- * @version 18.4.2025
+ * @version 24.4.2025
+ * 
+ * Huolehtii Ravintolat, Tuotteet, TuoteAllergeenit, Allergeenit -luokkien välisestä
+ * yhteistyöstä ja välittää näytä tietoja pyydettäessä
+ * 
+ * Lukee ja kirjoittaa Allergiainfon tiedot tiedostoihin avustajien avulla
  */
 public class Allergiainfo {
     

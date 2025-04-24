@@ -5,8 +5,12 @@ import java.util.*;
 
 /**
  * @author Viivi
- * @version 8.3.2025
- * @version 22.4.2025
+ * @version 24.4.2025
+ * 
+ * - Pitää ylä varsinaista TuoteAllergeenistoa
+ * - Lukee ja kirjoittaa tuotteen allergeenit tiedostoon
+ * - Osaa poistaa TuoteAllergeenin tietorakenteesta
+ * - Osaa hakea kaikki tietyn tuotteen allergeenit
  *
  */
 public class TuoteAllergeenit implements Iterable<TuoteAllergeeni> {
